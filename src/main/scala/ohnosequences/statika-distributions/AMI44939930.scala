@@ -16,12 +16,11 @@ object AMI44939930 extends AbstractAMI("ami-44939930", "2013.03"){
       , credentials: Either[(String, String), String] =
         Right("s3://private.snapshots.statika.ohnosequences.com/credentials/AwsCredentials.properties")
       )(implicit
-        md: MetaDataOfDist[distribution.type]
-      , mb: MetaDataOfBundle[bundle.type]
+        md: MetaDataOf[distribution.type]
+      , mb: MetaDataOf[bundle.type]
       , mm: distribution.IsMember[bundle.type]
       ): String = {
-    // val mb = implicitly[MetaDataOf[B]]
-    // val md = implicitly[MetaDataOfDist[D]]
+
     val initSetting =
 """#!/bin/sh
 
@@ -67,7 +66,6 @@ echo
 s3cmd --config /root/.s3cfg get ${bucket}
 """
   }
-
   val sbtCsG8 =
 """
 echo
@@ -93,11 +91,12 @@ echo
 echo " -- Running g8 -- "
 echo
 g8 ohnosequences/statika-bundle.g8 -b feature/bundle-tester \
-  '--name=BundleTester' \"""+
-  "'--distribution_object="+distribution.fullName+"' \\"+
-  "'--distribution_artifact=" +md.organization+" %% "+md.artifact+" % "+md.version+"' \\"+
-  "'--bundle_object="+bundle.fullName+"' \\"+
-  "'--bundle_artifact=" +mb.organization+" %% "+mb.artifact+" % "+mb.version+"' \\"+
+  '--name=BundleTester'"""+
+  "'--bundle_object="+mb.name+"'"+
+  "'--bundle_artifact=" +mb.organization+" %% "+mb.artifact+" % "+mb.version+"'"+
+  "'--distribution_object="+md.name+"'"+
+  "'--distribution_artifact=" +md.organization+" %% "+md.artifact+" % "+md.version+"'"+
+  "'--resolvers="+md.resolvers+"'"+
   """'--credentials=/root/AwsCredentials.properties'
 cd bundletester
 
