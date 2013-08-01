@@ -91,12 +91,12 @@ echo
 echo " -- Running g8 -- "
 echo
 g8 ohnosequences/statika-bundle.g8 -b feature/bundle-tester \
-  '--name=BundleTester'"""+
-  "'--bundle_object="+mb.name+"'"+
-  "'--bundle_artifact=" +mb.organization+" %% "+mb.artifact+" % "+mb.version+"'"+
-  "'--distribution_object="+md.name+"'"+
-  "'--distribution_artifact=" +md.organization+" %% "+md.artifact+" % "+md.version+"'"+
-  "'--resolvers="+md.resolvers+"'"+
+  '--name=BundleTester' """+
+  "'--bundle_object="+mb.name+"' "+
+  "'--bundle_artifact=\"" +mb.organization+"\" %% \""+mb.artifact+"\" % \""+mb.version+"\"' "+
+  "'--distribution_object="+md.name+"' "+
+  "'--distribution_artifact=\"" +md.organization+"\" %% \""+md.artifact+"\" % \""+md.version+"\"' "+
+  "'--resolvers="+md.resolvers+"' "+
   """'--credentials=/root/AwsCredentials.properties'
 cd bundletester
 
