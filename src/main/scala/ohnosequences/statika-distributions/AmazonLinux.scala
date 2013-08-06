@@ -5,24 +5,25 @@ import General._
 import MetaData._
 import Distribution._
 
+trait CommonMetaData[S] extends MetaDataOf[S] {
+  val organization = meta.AmazonLinux.organization
+  val artifact = meta.AmazonLinux.artifact
+  val version = meta.AmazonLinux.version
+  val statikaVersion = meta.AmazonLinux.statikaVersion
+  val resolvers = meta.AmazonLinux.resolvers
+  val privateResolvers = meta.AmazonLinux.privateResolvers
+}
+
 case object Foo extends Bundle() {
-  val metadata = new MetaDataOf[this.type] {
+  val metadata = new CommonMetaData[this.type] {
     val name = "ohnosequences.statika.Foo"
-    val organization = "ohnosequences"
-    val artifact = "foo"
-    val version = "0.2.3"
-    val resolvers = Seq()
   }
 }
 
 
 case object Bar extends Bundle(Foo :: HNil) {
-  val metadata = new MetaDataOf[this.type] {
+  val metadata = new CommonMetaData[this.type] {
     val name = "ohnosequences.statika.Bar"
-    val organization = "ohnosequences"
-    val artifact = "bar"
-    val version = "0.2.3"
-    val resolvers = Seq()
   }
 }
 

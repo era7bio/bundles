@@ -94,7 +94,9 @@ g8 ohnosequences/statika-bundle.g8 -b feature/bundle-tester \
   "'--bundle_artifact=\"" +mb.organization+"\" %% \""+mb.artifact+"\" % \""+mb.version+"\"' "+
   "'--distribution_object="+md.name+"' "+
   "'--distribution_artifact=\"" +md.organization+"\" %% \""+md.artifact+"\" % \""+md.version+"\"' "+
+  "'--statika_version="+md.statikaVersion+"' "+
   "'--resolvers="+md.resolvers.mkString(", ")+"' "+
+  "'--private_resolvers="+md.privateResolvers.mkString(", ")+"' "+
   """'--credentials=/root/AwsCredentials.properties'
 cd bundleapplicator
 
