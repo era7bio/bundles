@@ -6,39 +6,43 @@ import MetaData._
 import Distribution._
 
 case object Foo extends Bundle() {
-
-  implicit object MetaData extends MetaDataOf[this.type] {
-    val name = "Foo"
+  val metadata = new MetaDataOf[this.type] {
+    val name = "ohnosequences.statika.Foo"
     val organization = "ohnosequences"
     val artifact = "foo"
     val version = "0.2.3"
-    val resolvers = "FooResolvers"
+    val resolvers = Seq()
   }
 }
 
+
 case object Bar extends Bundle(Foo :: HNil) {
-  implicit object MetaData extends MetaDataOf[this.type] {
-    val name = "Bar"
+  val metadata = new MetaDataOf[this.type] {
+    val name = "ohnosequences.statika.Bar"
     val organization = "ohnosequences"
     val artifact = "bar"
     val version = "0.2.3"
-    val resolvers = "BarResolvers"
+    val resolvers = Seq()
   }
 }
 
 object AmazonLinux extends Distribution(
     AMI44939930,
-    Bar :: Foo :: HNil
+    Git :: Bar :: Foo :: HNil,
+    HNil
   ){
 
-  val resourceBucket: Path = ""
-  def getResourcePath[B <: BundleAux](bundle: B, relativePath: Path): Path = ""
+  // generated metadata
+  val metadata = meta.AmazonLinux
 
-  implicit object MetaData extends MetaDataOf[this.type] {
-    val name = "AmazonLinux"
-    val organization = "ohnosequences"
-    val artifact = "statika-distributions"
-    val version = "0.1.0"
-    val resolvers = "AmazonLinuxResolvers"
-  }
+  val defaultCreds = Right("s3://private.snapshots.statika.ohnosequences.com/credentials/AwsCredentials.properties")
+
+  override def userScript[B <: BundleAux : IsMember](
+      bundle: B
+    , credentials: Either[(String, String), String] = defaultCreds
+    ): String =
+      ami.userScript(this, bundle, credentials)
+
+  val resourceBucket = ""
+  def getResourcePath[B <: BundleAux](bundle: B, relativePath: Path): Path = ""
 }

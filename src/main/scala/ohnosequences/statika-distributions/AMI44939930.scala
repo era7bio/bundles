@@ -8,18 +8,16 @@ import MetaData._
 
 object AMI44939930 extends AbstractAMI("ami-44939930", "2013.03"){
 
-    def userScript[
+    private[statika] def userScript[
         D <: DistributionAux
-      , B <: BundleAux
+      , B <: BundleAux : distribution.IsMember
       ](distribution: D
       , bundle: B
-      , credentials: Either[(String, String), String] =
-        Right("s3://private.snapshots.statika.ohnosequences.com/credentials/AwsCredentials.properties")
-      )(implicit
-        md: MetaDataOf[distribution.type]
-      , mb: MetaDataOf[bundle.type]
-      , mm: distribution.IsMember[bundle.type]
+      , credentials: Either[(String, String), String]
       ): String = {
+
+        val mb = bundle.metadata
+        val md = distribution.metadata
 
     val initSetting =
 """#!/bin/sh
@@ -91,14 +89,14 @@ echo
 echo " -- Running g8 -- "
 echo
 g8 ohnosequences/statika-bundle.g8 -b feature/bundle-tester \
-  '--name=BundleTester' """+
+  '--name=BundleApplicator' """+
   "'--bundle_object="+mb.name+"' "+
   "'--bundle_artifact=\"" +mb.organization+"\" %% \""+mb.artifact+"\" % \""+mb.version+"\"' "+
   "'--distribution_object="+md.name+"' "+
   "'--distribution_artifact=\"" +md.organization+"\" %% \""+md.artifact+"\" % \""+md.version+"\"' "+
-  "'--resolvers="+md.resolvers+"' "+
+  "'--resolvers="+md.resolvers.mkString(", ")+"' "+
   """'--credentials=/root/AwsCredentials.properties'
-cd bundletester
+cd bundleapplicator
 
 echo
 echo " -- Building  -- "
