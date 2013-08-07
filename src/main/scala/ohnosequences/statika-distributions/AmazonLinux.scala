@@ -14,19 +14,19 @@ trait CommonMetaData[S] extends MetaDataOf[S] {
   val privateResolvers = meta.AmazonLinux.privateResolvers
 }
 
+// Just a couple of testing bundles
 case object Foo extends Bundle() {
   val metadata = new CommonMetaData[this.type] {
     val name = "ohnosequences.statika.Foo"
   }
 }
-
-
 case object Bar extends Bundle(Foo :: HNil) {
   val metadata = new CommonMetaData[this.type] {
     val name = "ohnosequences.statika.Bar"
   }
 }
 
+// Actual distribution
 object AmazonLinux extends Distribution(
     AMI44939930,
     Git :: Bar :: Foo :: HNil,
@@ -36,14 +36,15 @@ object AmazonLinux extends Distribution(
   // generated metadata
   val metadata = meta.AmazonLinux
 
-  val defaultCreds = Right("s3://private.snapshots.statika.ohnosequences.com/credentials/AwsCredentials.properties")
+  val defaultCreds = 
 
+  // overrriding only to set the default credentials parameter
   override def userScript[B <: BundleAux : IsMember](
       bundle: B
     , credentials: Either[(String, String), String] = defaultCreds
-    ): String =
-      ami.userScript(this, bundle, credentials)
+    ): String = ami.userScript(this, bundle, credentials)
 
   val resourceBucket = ""
   def getResourcePath[B <: BundleAux](bundle: B, relativePath: Path): Path = ""
+  
 }

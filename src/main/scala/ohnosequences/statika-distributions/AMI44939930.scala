@@ -30,7 +30,7 @@ echo " -- Setting environment -- "
 echo
 cd /root
 export HOME="/root"
-export PATH="/root/bin:$$PATH"
+export PATH="/root/bin:$PATH"
 env
 
 echo
@@ -40,10 +40,10 @@ yum install git -y
 """
 
   val credentialsSet = credentials match {
-      case Left((usr,psw)) => s"""
-echo "accessKey = ${usr}" >  /root/AwsCredentials.properties
-echo "secretKey = ${psw}" >> /root/AwsCredentials.properties
-      """
+      case Left((usr,psw)) => """
+echo "accessKey = %s" >  /root/AwsCredentials.properties
+echo "secretKey = %s" >> /root/AwsCredentials.properties
+      """ format (usr, psw)
       case Right(bucket) => """
 echo
 echo " -- Installing s3cmd -- "
@@ -61,11 +61,10 @@ cat /root/.s3cfg
 echo
 echo " -- Getting credentials -- "
 echo
-s3cmd --config /root/.s3cfg get ${bucket}
-"""
+s3cmd --config /root/.s3cfg get """ + bucket
   }
-  val sbtCsG8 =
-"""
+
+  val sbtCsG8 = """
 echo
 echo " -- Installing sbt -- "
 echo
@@ -83,8 +82,7 @@ echo
 cs n8han/giter8
 """
 
-  val template =
-"""
+  val template = """
 echo
 echo " -- Running g8 -- "
 echo
@@ -99,22 +97,24 @@ g8 ohnosequences/statika-bundle.g8 -b feature/bundle-tester \
   "'--private_resolvers="+md.privateResolvers.mkString(", ")+"' "+
   """'--credentials=/root/AwsCredentials.properties'
 cd bundleapplicator
+"""
 
+  val building = """
 echo
-echo " -- Building  -- "
+echo " -- Building -- "
 echo
 sbt start-script
+"""
 
+  val running = """
 echo
-echo " -- Running  -- "
+echo " -- Running -- "
 echo
 target/start
 """
 
-    initSetting + 
-    credentialsSet +
-    sbtCsG8 +
-    template
+    initSetting + credentialsSet + sbtCsG8 +
+    template + building + running
   }
 
 }
