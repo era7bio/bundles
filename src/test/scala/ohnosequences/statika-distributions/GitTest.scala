@@ -1,11 +1,8 @@
-package ohnosequences.statika
+package ohnosequences.statika.tests
 
 class GitTest extends org.scalatest.FunSuite {
 
-  import shapeless._
-  import General._
-  import MetaData._
-  import Distribution._
+  import ohnosequences.statika._
 
   import gener8bundle.StatikaEC2._
   import ohnosequences.awstools.ec2._

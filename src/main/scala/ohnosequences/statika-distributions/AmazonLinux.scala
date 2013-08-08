@@ -1,11 +1,6 @@
 package ohnosequences.statika
 
-import shapeless._
-import General._
-import MetaData._
-import Distribution._
-
-trait CommonMetaData[S] extends MetaDataOf[S] {
+case class CommonMetaData[S](s: S, val name: String) extends MetaDataOf[S] {
   val organization = meta.AmazonLinux.organization
   val artifact = meta.AmazonLinux.artifact
   val version = meta.AmazonLinux.version
@@ -16,14 +11,10 @@ trait CommonMetaData[S] extends MetaDataOf[S] {
 
 // Just a couple of testing bundles
 case object Foo extends Bundle() {
-  val metadata = new CommonMetaData[this.type] {
-    val name = "ohnosequences.statika.Foo"
-  }
+  val metadata = CommonMetaData(this, "ohnosequences.statika.Foo")
 }
 case object Bar extends Bundle(Foo :: HNil) {
-  val metadata = new CommonMetaData[this.type] {
-    val name = "ohnosequences.statika.Bar"
-  }
+  val metadata = CommonMetaData(this, "ohnosequences.statika.Bar")
 }
 
 // Actual distribution
@@ -37,6 +28,7 @@ object AmazonLinux extends Distribution(
   val metadata = meta.AmazonLinux
 
   val defaultCreds = 
+    Right("s3://private.snapshots.statika.ohnosequences.com/credentials/AwsCredentials.properties")
 
   // overrriding only to set the default credentials parameter
   override def userScript[B <: BundleAux : IsMember](
@@ -46,5 +38,5 @@ object AmazonLinux extends Distribution(
 
   val resourceBucket = ""
   def getResourcePath[B <: BundleAux](bundle: B, relativePath: Path): Path = ""
-  
+
 }

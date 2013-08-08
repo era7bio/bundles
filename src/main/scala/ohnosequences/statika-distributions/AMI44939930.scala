@@ -1,11 +1,5 @@
 package ohnosequences.statika
 
-import ohnosequences.statika._
-import General._
-import Distribution._
-import AMI._
-import MetaData._
-
 object AMI44939930 extends AbstractAMI("ami-44939930", "2013.03"){
 
     private[statika] def userScript[
