@@ -1,27 +1,11 @@
-package ohnosequences.statika
+package ohnosequences.statika.distributions
 
-case class CommonMetaData[S](s: S, val name: String) extends MetaDataOf[S] {
-  val organization = meta.AmazonLinux.organization
-  val artifact = meta.AmazonLinux.artifact
-  val version = meta.AmazonLinux.version
-  val statikaVersion = meta.AmazonLinux.statikaVersion
-  val resolvers = meta.AmazonLinux.resolvers
-  val privateResolvers = meta.AmazonLinux.privateResolvers
-}
+import ohnosequences.statika._
+import ami._
 
-// Just a couple of testing bundles
-case object Foo extends Bundle() {
-  val metadata = CommonMetaData(this, "ohnosequences.statika.Foo")
-}
-case object Bar extends Bundle(Foo :: HNil) {
-  val metadata = CommonMetaData(this, "ohnosequences.statika.Bar")
-}
-
-// Actual distribution
 object AmazonLinux extends Distribution(
     AMI44939930,
-    Git :: Bar :: Foo :: HNil,
-    HNil
+    Git :: HNil
   ){
 
   // generated metadata

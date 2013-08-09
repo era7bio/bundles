@@ -1,4 +1,6 @@
-package ohnosequences.statika
+package ohnosequences.statika.ami
+
+import ohnosequences.statika._
 
 object AMI44939930 extends AbstractAMI("ami-44939930", "2013.03"){
 

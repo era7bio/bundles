@@ -3,6 +3,7 @@ package ohnosequences.statika.tests
 class GitTest extends org.scalatest.FunSuite {
 
   import ohnosequences.statika._
+  import distributions._
 
   import gener8bundle.StatikaEC2._
   import ohnosequences.awstools.ec2._

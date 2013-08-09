@@ -19,6 +19,7 @@ licenses += "AGPLv3" -> url("http://www.gnu.org/licenses/agpl-3.0.txt")
 
 scalaVersion := "2.10.2"
 
+statikaVersion := "0.12.2"
 
 // for publishing you need to set `s3credentials`
 publishTo <<= (isSnapshot, s3credentials) { 
@@ -33,6 +34,6 @@ libraryDependencies ++= Seq(
   )
 
 // Metadata generation
-bundlePackage := "ohnosequences.statika"
+bundlePackage := "ohnosequences.statika.distributions"
 
 bundleObject := "AmazonLinux"
