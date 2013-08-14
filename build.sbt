@@ -21,16 +21,25 @@ scalaVersion := "2.10.2"
 
 statikaVersion := "0.12.2"
 
+
+s3resolvers := Seq()
+
+publishMavenStyle := false
+
 // for publishing you need to set `s3credentials`
 publishTo <<= (isSnapshot, s3credentials) { 
                 (snapshot,   credentials) => 
   val prefix = if (snapshot) "snapshots" else "releases"
-  credentials map s3resolver("Era7 "+prefix+" S3 bucket", "s3://"+prefix+".era7.com")
+  credentials map S3Resolver(
+      "Era7 "+prefix+" S3 bucket"
+    , "s3://"+prefix+".era7.com"
+    , Resolver.ivyStylePatterns
+    ).toSbtResolver
 }
 
 libraryDependencies ++= Seq(
-    "ohnosequences" %% "git" % "0.4.0"
-  , "ohnosequences" % "gener8bundle_2.10.2" % "0.12.0-SNAPSHOT" % "test"
+    "ohnosequences" %% "git" % "0.5.0"
+  , "ohnosequences" % "gener8bundle_2.10.2" % "0.12.0" % "test"
   )
 
 // Metadata generation

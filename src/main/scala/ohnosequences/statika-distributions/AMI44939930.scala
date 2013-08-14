@@ -60,47 +60,46 @@ echo
 s3cmd --config /root/.s3cfg get """ + bucket
   }
 
-  val sbtCsG8 = """
+  val sbt = """
 echo
 echo " -- Installing sbt -- "
 echo
 curl http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/0.12.3/sbt.rpm > sbt.rpm
 yum install sbt.rpm -y 
-
-echo
-echo " -- Installing conscript -- "
-echo
-curl https://raw.github.com/n8han/conscript/master/setup.sh | sh
-
-echo
-echo " -- Installing giter8 -- "
-echo
-cs n8han/giter8
-"""
-
-  val template = """
-echo
-echo " -- Running g8 -- "
-echo
-g8 ohnosequences/statika-bundle.g8 -b feature/bundle-tester \
-  '--name=BundleApplicator' """+
-  "'--bundle_object="+mb.name+"' "+
-  "'--bundle_artifact=\"" +mb.organization+"\" %% \""+mb.artifact+"\" % \""+mb.version+"\"' "+
-  "'--distribution_object="+md.name+"' "+
-  "'--distribution_artifact=\"" +md.organization+"\" %% \""+md.artifact+"\" % \""+md.version+"\"' "+
-  "'--statika_version="+md.statikaVersion+"' "+
-  "'--resolvers="+md.resolvers.mkString(", ")+"' "+
-  "'--private_resolvers="+md.privateResolvers.mkString(", ")+"' "+
-  """'--credentials=/root/AwsCredentials.properties'
-cd bundleapplicator
 """
 
   val building = """
 echo
-echo " -- Building -- "
+echo " -- Building Applicator -- "
 echo
-sbt start-script
-"""
+mkdir applicator
+cd applicator
+sbt 'set name := "applicator"' \
+  'set scalaVersion := "2.10.2"' \
+  'session save' \
+  'reload plugins' \
+  'set resolvers += "Era7 releases" at "http://releases.era7.com.s3.amazonaws.com"' \
+  'set resolvers += "Era7 snapshots" at "http://snapshots.era7.com.s3.amazonaws.com"' \
+  'set addSbtPlugin("ohnosequences" %% "sbt-s3-resolver" %% "0.5.0-SNAPSHOT")' \
+  'set addSbtPlugin("com.typesafe.sbt" %% "sbt-start-script" %% "0.8.0")' \
+  'session save' \
+  'reload return' \
+  'set s3credentialsFile in Global := Some("/root/AwsCredentials.properties")' \
+  'set resolvers ++= %s' \
+  'set resolvers <++= s3credentials { cs => (%s map { r: S3Resolver => { cs map r.toSbtResolver } }).flatten }' \
+  'set libraryDependencies ++= Seq ("ohnosequences" %%%% "statika" %% "%s", %s, %s)' \
+  'set sourceGenerators in Compile <+= sourceManaged in Compile map { dir => val file = dir / "apply.scala"; IO.write(file, "%s"); Seq(file) }' \
+  'session save' \
+  'add-start-script-tasks' \
+  'start-script'
+""" format (
+    md.resolvers
+  , md.privateResolvers
+  , md.statikaVersion
+  , """"%s" %%%% "%s" %% "%s" """ format (md.organization, md.artifact, md.version)
+  , """"%s" %%%% "%s" %% "%s" """ format (mb.organization, mb.artifact, mb.version)
+  , """object apply extends App {%s.installWithDeps(%s) map println}""" format (md.name, mb.name)
+  )
 
   val running = """
 echo
@@ -109,8 +108,8 @@ echo
 target/start
 """
 
-    initSetting + credentialsSet + sbtCsG8 +
-    template + building + running
+    initSetting + credentialsSet + sbt +
+    building + running
   }
 
 }
