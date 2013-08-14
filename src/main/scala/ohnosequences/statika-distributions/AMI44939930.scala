@@ -79,8 +79,7 @@ sbt 'set name := "applicator"' \
   'session save' \
   'reload plugins' \
   'set resolvers += "Era7 releases" at "http://releases.era7.com.s3.amazonaws.com"' \
-  'set resolvers += "Era7 snapshots" at "http://snapshots.era7.com.s3.amazonaws.com"' \
-  'set addSbtPlugin("ohnosequences" %% "sbt-s3-resolver" %% "0.5.0-SNAPSHOT")' \
+  'set addSbtPlugin("ohnosequences" %% "sbt-s3-resolver" %% "0.5.0")' \
   'set addSbtPlugin("com.typesafe.sbt" %% "sbt-start-script" %% "0.8.0")' \
   'session save' \
   'reload return' \
