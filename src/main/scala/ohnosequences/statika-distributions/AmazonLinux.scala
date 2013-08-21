@@ -1,11 +1,10 @@
 package ohnosequences.statika.distributions
 
 import ohnosequences.statika._
-import ami._
 
 object AmazonLinux extends Distribution(
-    AMI44939930,
-    Git :: HNil
+    ami.AMI44939930,
+    members = Git :: HNil
   ){
 
   // generated metadata

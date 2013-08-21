@@ -38,7 +38,8 @@ publishTo <<= (isSnapshot, s3credentials) {
 }
 
 libraryDependencies ++= Seq(
-    "ohnosequences" %% "git" % "0.5.0"
+    "ohnosequences" %% "ami-44939930" % "0.6.0"
+  , "ohnosequences" %% "git" % "0.5.0"
   , "ohnosequences" % "gener8bundle_2.10.2" % "0.12.0" % "test"
   )
 
