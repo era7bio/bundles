@@ -17,12 +17,8 @@ organizationHomepage := Some(url("http://ohnosequences.com"))
 licenses += "AGPLv3" -> url("http://www.gnu.org/licenses/agpl-3.0.txt")
 
 
-scalaVersion := "2.10.2"
-
-statikaVersion := "0.12.2"
-
-
-s3resolvers := Seq()
+// no private plugins so far
+privateResolvers := Seq()
 
 publishMavenStyle := false
 
@@ -38,12 +34,13 @@ publishTo <<= (isSnapshot, s3credentials) {
 }
 
 libraryDependencies ++= Seq(
-    "ohnosequences" %% "ami-44939930" % "0.6.0"
-  , "ohnosequences" %% "git" % "0.5.0"
-  , "ohnosequences" % "gener8bundle_2.10.2" % "0.12.0" % "test"
+    "ohnosequences" % "statika-cli_2.10.2" % "0.15.1" % "test"
+  , "ohnosequences" %% "ami-44939930" % "0.8.1"
+  , "ohnosequences" %% "git" % "0.6.0"
+  , "ohnosequences" %% "boost" % "0.1.0"
+  , "ohnosequences" %% "bowtie" % "0.1.0"
+  , "ohnosequences" %% "tophat" % "0.1.0"
+  , "ohnosequences" %% "cufflinks" % "0.1.0"
   )
 
-// Metadata generation
-bundlePackage := "ohnosequences.statika.distributions"
-
-bundleObject := "AmazonLinux"
+bundleObjects := Seq("ohnosequences.statika.distributions.AmazonLinux")
