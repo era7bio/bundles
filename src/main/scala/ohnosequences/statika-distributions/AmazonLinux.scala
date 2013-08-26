@@ -4,7 +4,10 @@ import ohnosequences.statika._
 
 object AmazonLinux extends Distribution(
     ami.AMI44939930,
-    members = Cufflinks :: Tophat :: Bowtie :: Boost :: Git :: HNil
+    members = 
+    	S3cmd :: Python ::
+    	Cufflinks :: Tophat :: Bowtie :: Boost :: 
+    	Git :: HNil
   ){
 
   val metadata = generated.metadata.AmazonLinux

@@ -114,4 +114,46 @@ class ApplicationTest extends org.scalatest.FunSuite {
     ec2.runInstancesAndWait(1, specs).length == 1
   }
 
+  test("Running instance with Python bundle test"){
+
+    val userscript = AmazonLinux.userScript(Python, RoleCredentials)
+    // println(userscript)
+
+    // for running test you need to have this file in your project folder
+    val ec2 = EC2.create(new File("AwsCredentials.properties"))
+
+    val specs = InstanceSpecs(
+        instanceType = InstanceType.InstanceType("c1.medium")
+      , amiId = AmazonLinux.ami.id
+      , keyName = "statika-launcher" 
+      , deviceMapping = Map()
+      , userData = userscript
+      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
+      )
+
+    // we asked for 1 instanse — we should get 1 instance
+    ec2.runInstancesAndWait(1, specs).length == 1
+  }
+
+  test("Running instance with S3cmd bundle test"){
+
+    val userscript = AmazonLinux.userScript(S3cmd, RoleCredentials)
+    // println(userscript)
+
+    // for running test you need to have this file in your project folder
+    val ec2 = EC2.create(new File("AwsCredentials.properties"))
+
+    val specs = InstanceSpecs(
+        instanceType = InstanceType.InstanceType("c1.medium")
+      , amiId = AmazonLinux.ami.id
+      , keyName = "statika-launcher" 
+      , deviceMapping = Map()
+      , userData = userscript
+      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
+      )
+
+    // we asked for 1 instanse — we should get 1 instance
+    ec2.runInstancesAndWait(1, specs).length == 1
+  }
+
 }
