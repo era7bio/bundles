@@ -41,8 +41,11 @@ libraryDependencies ++= Seq(
   , "ohnosequences" %% "bowtie" % "0.1.0"
   , "ohnosequences" %% "tophat" % "0.1.0"
   , "ohnosequences" %% "cufflinks" % "0.1.0"
-  , "ohnosequences" %% "python" % "0.1.0"
+  , "ohnosequences" %% "python" % "0.1.1"
   , "ohnosequences" %% "s3cmd" % "0.1.0"
+  , "ohnosequences" %% "gcc" % "0.1.0"
+  , "ohnosequences" %% "zlib-devel" % "0.1.0"
+  , "ohnosequences" %% "velvet" % "0.1.1"
   )
 
 bundleObjects := Seq("ohnosequences.statika.distributions.AmazonLinux")

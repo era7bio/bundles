@@ -2,12 +2,11 @@ package ohnosequences.statika.distributions
 
 import ohnosequences.statika._
 
-object AmazonLinux extends Distribution(
+case object AmazonLinux extends Distribution(
     ami.AMI44939930,
     members = 
-    	S3cmd :: Python ::
-    	Cufflinks :: Tophat :: Bowtie :: Boost :: 
-    	Git :: HNil
+      Velvet :: Cufflinks :: Tophat :: Bowtie :: Boost :: 
+      ZlibDevel :: GCC :: S3cmd :: Python :: Git :: HNil
   ){
 
   val metadata = generated.metadata.AmazonLinux
