@@ -35,7 +35,10 @@ publishTo <<= (isSnapshot, s3credentials) {
 
 libraryDependencies ++= Seq(
     "ohnosequences" % "statika-cli_2.10.2" % "0.15.1" % "test"
-  , "ohnosequences" %% "ami-44939930" % "0.8.1"
+    // "ohnosequences" % "statika-cli_2.10.2" % "0.16.0-SNAPSHOT" % "test"
+  // , "ohnosequences" %% "ami-44939930" % "0.8.1"
+  , "ohnosequences" %% "ami-44939930" % "0.9.0-SNAPSHOT"
+  // members: //
   , "ohnosequences" %% "git" % "0.6.0"
   , "ohnosequences" %% "boost" % "0.1.0"
   , "ohnosequences" %% "bowtie" % "0.1.0"
@@ -47,5 +50,11 @@ libraryDependencies ++= Seq(
   , "ohnosequences" %% "zlib-devel" % "0.1.0"
   , "ohnosequences" %% "velvet" % "0.1.1"
   )
+
+// Running test in parallel
+testOptions in Test += Tests.Argument("-P12")
+
+// Showing time spent on each test
+testOptions in Test += Tests.Argument("-oD")
 
 bundleObjects := Seq("ohnosequences.statika.distributions.AmazonLinux")
