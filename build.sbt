@@ -13,15 +13,7 @@ licenses := Seq("AGPLv3" -> url("http://www.gnu.org/licenses/agpl-3.0.txt"))
 
 publishMavenStyle := true
 
-// for publishing you need to set `s3credentials`
-publishTo <<= (isSnapshot, s3credentials) { 
-                (snapshot,   credentials) => 
-  val prefix = if (snapshot) "snapshots" else "releases"
-  credentials map S3Resolver(
-      "Era7 "+prefix+" S3 bucket"
-    , "s3://"+prefix+".era7.com"
-    ).toSbtResolver
-}
+publishBucketSuffix := "era7.com"
 
 bucketSuffix := "statika.ohnosequences.com"
 
@@ -44,9 +36,6 @@ libraryDependencies ++= Seq(
   // , "ohnosequences" %% "python" % "0.1.1"
   // , "ohnosequences" %% "s3cmd" % "0.1.0"
   )
-
-// no private plugins so far
-privateResolvers := Seq()
 
 
 // Running test in parallel
