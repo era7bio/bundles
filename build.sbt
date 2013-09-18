@@ -20,7 +20,7 @@ licenses += "AGPLv3" -> url("http://www.gnu.org/licenses/agpl-3.0.txt")
 // no private plugins so far
 privateResolvers := Seq()
 
-publishMavenStyle := false
+publishMavenStyle := true
 
 // for publishing you need to set `s3credentials`
 publishTo <<= (isSnapshot, s3credentials) { 
@@ -29,7 +29,6 @@ publishTo <<= (isSnapshot, s3credentials) {
   credentials map S3Resolver(
       "Era7 "+prefix+" S3 bucket"
     , "s3://"+prefix+".era7.com"
-    , Resolver.ivyStylePatterns
     ).toSbtResolver
 }
 
@@ -39,16 +38,16 @@ libraryDependencies ++= Seq(
   // , "ohnosequences" %% "ami-44939930" % "0.8.1"
   , "ohnosequences" %% "ami-44939930" % "0.9.0-SNAPSHOT"
   // members: //
-  , "ohnosequences" %% "git" % "0.6.0"
-  , "ohnosequences" %% "boost" % "0.1.0"
-  , "ohnosequences" %% "bowtie" % "0.1.0"
-  , "ohnosequences" %% "tophat" % "0.1.0"
-  , "ohnosequences" %% "cufflinks" % "0.1.0"
-  , "ohnosequences" %% "python" % "0.1.1"
-  , "ohnosequences" %% "s3cmd" % "0.1.0"
-  , "ohnosequences" %% "gcc" % "0.1.0"
-  , "ohnosequences" %% "zlib-devel" % "0.1.0"
-  , "ohnosequences" %% "velvet" % "0.1.1"
+  // , "ohnosequences" %% "boost" % "0.1.0"
+  // , "ohnosequences" %% "bowtie" % "0.1.0"
+  // , "ohnosequences" %% "tophat" % "0.1.0"
+  // , "ohnosequences" %% "cufflinks" % "0.1.0"
+  // , "ohnosequences" %% "python" % "0.1.1"
+  // , "ohnosequences" %% "s3cmd" % "0.1.0"
+  , "ohnosequences" %% "git" % "0.7.0-SNAPSHOT"
+  , "ohnosequences" %% "gcc" % "0.2.0-SNAPSHOT"
+  , "ohnosequences" %% "zlib-devel" % "0.2.0-SNAPSHOT"
+  , "ohnosequences" %% "velvet" % "0.2.0-SNAPSHOT"
   )
 
 // Running test in parallel
@@ -58,3 +57,8 @@ testOptions in Test += Tests.Argument("-P12")
 testOptions in Test += Tests.Argument("-oD")
 
 bundleObjects := Seq("ohnosequences.statika.distributions.AmazonLinux")
+
+
+statikaVersion := "0.15.0-SNAPSHOT"
+
+awsStatikaVersion := "0.2.0-SNAPSHOT"

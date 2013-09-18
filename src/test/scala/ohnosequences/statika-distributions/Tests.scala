@@ -1,10 +1,12 @@
 package ohnosequences.statika.tests
 
 import ohnosequences.statika._
+import ohnosequences.statika.aws._
 import distributions._
 
 import cli.StatikaEC2._
 import ohnosequences.awstools.ec2._
+import ohnosequences.awstools.ec2.{Tag => Ec2Tag}
 import java.io._
 import org.scalatest._
 
@@ -21,7 +23,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
         val id = inst.getInstanceId()
         var previous: Option[String] = None
 
-        inst.createTag(Tag("Name", name))
+        inst.createTag(Ec2Tag("Name", name))
         println(name+" ("+id+"): launched")
 
         while({val s = status; s != Some("failure") && s != Some("success")}) {
@@ -38,8 +40,8 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
 
   def testBundle[
-      B <: BundleAux : dist.IsMember
-    , D <: DistributionAux
+      B <: AnyBundle : dist.IsMember
+    , D <: AnyAWSDistribution
     ](bundle: B, dist: D = AmazonLinux) = {
     test("Apply "+bundle.metadata+" bundle to an instance"){
       val userscript = dist.userScript(bundle, RoleCredentials)
@@ -51,22 +53,23 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
         , keyName = "statika-launcher" 
         , deviceMapping = Map()
         , userData = userscript
-        , instanceProfileARN = dist.metadata.instanceProfileARN
+        , instanceProfileARN = dist.instanceProfileARN
         )
 
       applyAndWait(bundle.metadata.name, specs)
     }
   }
 
-  testBundle(Velvet)
-  testBundle(Cufflinks)
-  testBundle(Tophat)
-  testBundle(Bowtie)
-  testBundle(Boost)
-  testBundle(S3cmd)
-  testBundle(Python)
   testBundle(Git)
-  testBundle(GCC)
-  testBundle(ZlibDevel)
+  // testBundle(GCC)
+  // testBundle(ZlibDevel)
+  // testBundle(Velvet)
+
+  // testBundle(Cufflinks)
+  // testBundle(Tophat)
+  // testBundle(Bowtie)
+  // testBundle(Boost)
+  // testBundle(S3cmd)
+  // testBundle(Python)
 
 }
