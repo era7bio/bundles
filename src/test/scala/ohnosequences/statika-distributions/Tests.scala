@@ -61,9 +61,9 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
   testBundle(Git)
-  // testBundle(GCC)
-  // testBundle(ZlibDevel)
-  // testBundle(Velvet)
+  testBundle(GCC)
+  testBundle(ZlibDevel)
+  testBundle(Velvet)
 
   // testBundle(Cufflinks)
   // testBundle(Tophat)
