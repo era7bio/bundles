@@ -6,8 +6,8 @@ import ohnosequences.statika.aws._
 case object AmazonLinux extends AWSDistribution(
     ami.AMI44939930,
     members = 
-      // Cufflinks :: Tophat :: Bowtie :: Boost :: S3cmd :: Python :: 
-      Velvet :: ZlibDevel :: GCC :: Git :: HNil
+      S3cmd :: Python :: Cufflinks :: Tophat :: Bowtie :: 
+      Boost :: Velvet :: ZlibDevel :: GCC :: Git :: HNil
   ){
 
   val metadata = generated.metadata.AmazonLinux
