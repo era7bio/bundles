@@ -1,222 +1,74 @@
 package ohnosequences.statika.tests
 
 import ohnosequences.statika._
+import ohnosequences.statika.aws._
 import distributions._
 
 import cli.StatikaEC2._
 import ohnosequences.awstools.ec2._
+import ohnosequences.awstools.ec2.{Tag => Ec2Tag}
 import java.io._
+import org.scalatest._
 
-class ApplicationTest extends org.scalatest.FunSuite {
+class ApplicationTest extends FunSuite with ParallelTestExecution {
 
-  test("Running instance with Git bundle test"){
+  // for running test you need to have this file in your project folder
+  val ec2 = EC2.create(new File("AwsCredentials.properties"))
 
-    val userscript = AmazonLinux.userScript(Git, RoleCredentials)
-    // println(userscript)
+  def applyAndWait(name: String, specs: InstanceSpecs): Boolean =
+    ec2.runInstances(1, specs) match {
+      case List(inst) => {
+        def status: Option[String] = inst.getTagValue("statika-status") 
 
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
+        val id = inst.getInstanceId()
+        var previous: Option[String] = None
 
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
+        inst.createTag(Ec2Tag("Name", name))
+        println(name+" ("+id+"): launched")
 
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
+        while({val s = status; s != Some("failure") && s != Some("success")}) {
+          val s = status
+          if (s != previous) println(name+" ("+id+"): "+s.getOrElse("..."))
+          previous = s
+          Thread sleep 3000
+        }
+        val result = status == Some("success")
+        if(result) inst.terminate()
+        result
+      }
+      case _ => false
+    }
+
+  def testBundle[
+      B <: AnyBundle : dist.IsMember
+    , D <: AnyAWSDistribution
+    ](bundle: B, dist: D = AmazonLinux) = {
+    test("Apply "+bundle.metadata+" bundle to an instance"){
+      val userscript = dist.userScript(bundle, RoleCredentials)
+      // println(userscript)
+
+      val specs = InstanceSpecs(
+          instanceType = InstanceType.InstanceType("c1.medium")
+        , amiId = dist.ami.id
+        , keyName = "statika-launcher" 
+        , deviceMapping = Map()
+        , userData = userscript
+        , instanceProfileARN = dist.instanceProfileARN
+        )
+
+      applyAndWait(bundle.metadata.name, specs)
+    }
   }
 
-  test("Running instance with Boost bundle test"){
-
-    val userscript = AmazonLinux.userScript(Boost, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with Bowtie bundle test"){
-
-    val userscript = AmazonLinux.userScript(Bowtie, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with Tophat bundle test"){
-
-    val userscript = AmazonLinux.userScript(Tophat, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with Cufflinks bundle test"){
-
-    val userscript = AmazonLinux.userScript(Cufflinks, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with Python bundle test"){
-
-    val userscript = AmazonLinux.userScript(Python, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with S3cmd bundle test"){
-
-    val userscript = AmazonLinux.userScript(S3cmd, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with GCC bundle test"){
-
-    val userscript = AmazonLinux.userScript(GCC, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with ZlibDevel bundle test"){
-
-    val userscript = AmazonLinux.userScript(ZlibDevel, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
-
-  test("Running instance with Velvet bundle test"){
-
-    val userscript = AmazonLinux.userScript(Velvet, RoleCredentials)
-    // println(userscript)
-
-    // for running test you need to have this file in your project folder
-    val ec2 = EC2.create(new File("AwsCredentials.properties"))
-
-    val specs = InstanceSpecs(
-        instanceType = InstanceType.InstanceType("c1.medium")
-      , amiId = AmazonLinux.ami.id
-      , keyName = "statika-launcher" 
-      , deviceMapping = Map()
-      , userData = userscript
-      , instanceProfileARN = AmazonLinux.metadata.instanceProfileARN
-      )
-
-    // we asked for 1 instanse — we should get 1 instance
-    ec2.runInstancesAndWait(1, specs).length == 1
-  }
+  testBundle(Git)
+  testBundle(GCC)
+  testBundle(ZlibDevel)
+  testBundle(S3cmd)
+  testBundle(Python)
+  testBundle(Velvet)
+  testBundle(Tophat)
+  testBundle(Bowtie)
+  testBundle(Boost)
+  testBundle(Cufflinks)
 
 }
