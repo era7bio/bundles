@@ -40,7 +40,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
 
   def testBundle[
-      B <: AnyBundle : dist.IsMember
+      B <: AnyBundle : dist.isMember : dist.isInstallable
     , D <: AnyAWSDistribution
     ](bundle: B, dist: D = AmazonLinux) = {
     test("Apply "+bundle.metadata+" bundle to an instance"){
@@ -61,14 +61,14 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
   testBundle(Git)
-  testBundle(GCC)
-  testBundle(ZlibDevel)
-  testBundle(S3cmd)
+  // testBundle(GCC)
+  // testBundle(ZlibDevel)
   testBundle(Python)
-  testBundle(Velvet)
-  testBundle(Tophat)
-  testBundle(Bowtie)
-  testBundle(Boost)
-  testBundle(Cufflinks)
+  testBundle(S3cmd)
+  // testBundle(Velvet)
+  // testBundle(Tophat)
+  // testBundle(Bowtie)
+  // testBundle(Boost)
+  // testBundle(Cufflinks)
 
 }
