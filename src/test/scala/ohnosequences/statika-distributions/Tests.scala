@@ -39,11 +39,14 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
       case _ => false
     }
 
+  val dist = AmazonLinux
+
   def testBundle[
-      B <: AnyBundle : dist.isMember : dist.isInstallable
-    , D <: AnyAWSDistribution
-    ](bundle: B, dist: D = AmazonLinux) = {
-    test("Apply "+bundle.metadata+" bundle to an instance"){
+      // M >: dist.Metadata <: dist.ami.MetadataBound
+     B <: AnyBundle : dist.isMember : dist.isInstallable
+    // , D <: AnyAWSDistribution
+    ](bundle: B) = { //, dist: D = AmazonLinux) = {
+    test("Apply "+bundle.name+" bundle to an instance"){
       val userscript = dist.userScript(bundle, RoleCredentials)
       // println(userscript)
 
@@ -53,17 +56,18 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
         , keyName = "statika-launcher" 
         , deviceMapping = Map()
         , userData = userscript
-        , instanceProfileARN = dist.instanceProfileARN
+        , instanceProfileARN = Some("arn:aws:iam::857948138625:instance-profile/statika-private-resolver")
         )
 
-      applyAndWait(bundle.metadata.name, specs)
+      // applyAndWait(bundle.name, specs)
+      println(userscript)
     }
   }
 
-  testBundle(Git)
+  // testBundle(Git)
   // testBundle(GCC)
   // testBundle(ZlibDevel)
-  testBundle(Python)
+  // testBundle(Python)
   testBundle(S3cmd)
   // testBundle(Velvet)
   // testBundle(Tophat)

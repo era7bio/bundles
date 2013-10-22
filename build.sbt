@@ -18,13 +18,11 @@ publishBucketSuffix := "era7.com"
 bucketSuffix := "statika.ohnosequences.com"
 
 
-bundleObjects := Seq("ohnosequences.statika.distributions.AmazonLinux")
-
+awsStatikaVersion := "0.4.0"
 
 libraryDependencies ++= Seq(
   "ohnosequences" % "statika-cli_2.10.2" % "0.15.2" % "test"
-, "ohnosequences" %% "ami-44939930" % "0.10.0-SNAPSHOT"
-, "ohnosequences" %% "aws-statika" % "0.3.0-SNAPSHOT"
+, "ohnosequences" %% "ami-44939930" % "0.11.0-SNAPSHOT"
 // members: //
 , "ohnosequences" %% "git" % "0.8.0-SNAPSHOT"
 // , "ohnosequences" %% "gcc" % "0.2.0"
