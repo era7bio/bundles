@@ -6,9 +6,8 @@ import ohnosequences.statika.aws._
 case object AmazonLinux extends AWSDistribution(
     metadata = generated.metadata.StatikaDistributions
   , ami = ami.AMI44939930
-  , members = Git :+: Python :+: S3cmd
-      // Cufflinks :+: Tophat :+: Bowtie :+: 
-      // Boost :+: Velvet :+: ZlibDevel :+: GCC
+  , members = Git :+: S3cmd :+: Velvet
+      // Cufflinks :+: Tophat :+: Bowtie :+: Boost
   ){
 
   def install[D <: AnyDistribution](distribution: D): InstallResults =
