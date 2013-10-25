@@ -59,7 +59,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
         , instanceProfileARN = Some("arn:aws:iam::857948138625:instance-profile/statika-private-resolver")
         )
 
-      applyAndWait(bundle.name, specs)
+      assert(applyAndWait(bundle.name, specs))
       // println(userscript)
     }
   }

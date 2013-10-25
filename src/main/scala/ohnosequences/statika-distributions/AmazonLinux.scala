@@ -10,7 +10,7 @@ case object AmazonLinux extends AWSDistribution(
       // Cufflinks :+: Tophat :+: Bowtie :+: Boost
   ){
 
-  def install[D <: AnyDistribution](distribution: D): InstallResults =
+  def install[D <: AnyDistribution](d: D): InstallResults =
     success(name+" is installed")
 
 }
