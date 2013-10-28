@@ -11,6 +11,8 @@ organizationHomepage := Some(url("http://ohnosequences.com"))
 licenses := Seq("AGPLv3" -> url("http://www.gnu.org/licenses/agpl-3.0.txt"))
 
 
+distributionSettings
+
 publishMavenStyle := true
 
 publishBucketSuffix := "era7.com"
@@ -18,15 +20,13 @@ publishBucketSuffix := "era7.com"
 bucketSuffix := "statika.ohnosequences.com"
 
 
-awsStatikaVersion := "0.4.0"
-
 libraryDependencies ++= Seq(
   "ohnosequences" % "statika-cli_2.10.2" % "0.15.2" % "test"
-, "ohnosequences" %% "ami-44939930" % "0.11.0-SNAPSHOT"
-// members: //
-, "ohnosequences" %% "yum" % "0.1.0-SNAPSHOT"
-, "ohnosequences" %% "s3cmd" % "0.3.0-SNAPSHOT"
-, "ohnosequences" %% "velvet" % "0.3.0-SNAPSHOT"
+, "ohnosequences" %% "ami-44939930" % "0.11.0"
+/////////// members: /////////////
+, "ohnosequences" %% "yum" % "0.1.0"
+, "ohnosequences" %% "s3cmd" % "0.3.0"
+, "ohnosequences" %% "velvet" % "0.3.0"
 // , "ohnosequences" %% "boost" % "0.2.0"
 // , "ohnosequences" %% "bowtie" % "0.2.0"
 // , "ohnosequences" %% "tophat" % "0.2.0"

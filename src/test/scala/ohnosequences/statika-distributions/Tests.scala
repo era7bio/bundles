@@ -41,11 +41,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val dist = AmazonLinux
 
-  def testBundle[
-      // M >: dist.Metadata <: dist.ami.MetadataBound
-     B <: AnyBundle : dist.isMember : dist.isInstallable
-    // , D <: AnyAWSDistribution
-    ](bundle: B) = { //, dist: D = AmazonLinux) = {
+  def testBundle[B <: AnyBundle : dist.isMember : dist.isInstallable](bundle: B) = {
     test("Apply "+bundle.name+" bundle to an instance"){
       val userscript = dist.userScript(bundle, RoleCredentials)
       // println(userscript)
