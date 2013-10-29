@@ -63,9 +63,9 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   testBundle(Git)
   testBundle(S3cmd)
   testBundle(Velvet)
-  // testBundle(Tophat)
-  // testBundle(Bowtie)
-  // testBundle(Boost)
-  // testBundle(Cufflinks)
+  testBundle(Bowtie)
+  testBundle(Bowtie2)
+  testBundle(Tophat)
+  testBundle(Cufflinks)
 
 }

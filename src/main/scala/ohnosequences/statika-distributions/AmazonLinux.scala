@@ -9,8 +9,7 @@ case object AmazonLinux extends AWSDistribution(
       override def moduleID = super.moduleID + """ intransitive() classifier "fat" """
     }
   , ami = ami.AMI44939930
-  , members = Git :+: S3cmd :+: Velvet
-      // Cufflinks :+: Tophat :+: Bowtie :+: Boost
+  , members = Git :+: S3cmd :+: Velvet :+: Bowtie :+: Bowtie2 :+: Tophat :+: Cufflinks
   ){
 
   def install[D <: AnyDistribution](d: D): InstallResults =
