@@ -21,8 +21,8 @@ bucketSuffix := "statika.ohnosequences.com"
 
 
 libraryDependencies ++= Seq(
-  "ohnosequences" % "statika-cli_2.10.2" % "0.15.2" % "test"
-, "ohnosequences" %% "ami-44939930" % "0.11.0"
+  "ohnosequences" % "statika-cli_2.10.3" % "0.16.1-SNAPSHOT" % "test"
+, "ohnosequences" %% "ami-44939930" % "0.12.0-SNAPSHOT"
 ///////////// members: ///////////////
 , "ohnosequences" %% "yum" % "0.1.0"
 , "ohnosequences" %% "s3cmd" % "0.3.0"

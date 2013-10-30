@@ -4,11 +4,8 @@ import ohnosequences.statika._
 import ohnosequences.statika.aws._
 
 case object AmazonLinux extends AWSDistribution(
-    metadata = new generated.metadata.StatikaDistributions() {
-      // because we want to use fat artifact:
-      override def moduleID = super.moduleID + """ intransitive() classifier "fat" """
-    }
-  , ami = ami.AMI44939930
+    metadata = new generated.metadata.StatikaDistributions()
+  , ami = ami.AMI149f7863
   , members = Git :+: S3cmd :+: Velvet :+: Bowtie :+: Bowtie2 :+: Tophat :+: Cufflinks
   ){
 

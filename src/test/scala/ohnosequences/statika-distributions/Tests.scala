@@ -15,36 +15,12 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // for running test you need to have this file in your project folder
   val ec2 = EC2.create(new File("AwsCredentials.properties"))
 
-  def applyAndWait(name: String, specs: InstanceSpecs): Boolean =
-    ec2.runInstances(1, specs) match {
-      case List(inst) => {
-        def status: Option[String] = inst.getTagValue("statika-status") 
-
-        val id = inst.getInstanceId()
-        var previous: Option[String] = None
-
-        inst.createTag(Ec2Tag("Name", name))
-        println(name+" ("+id+"): launched")
-
-        while({val s = status; s != Some("failure") && s != Some("success")}) {
-          val s = status
-          if (s != previous) println(name+" ("+id+"): "+s.getOrElse("..."))
-          previous = s
-          Thread sleep 3000
-        }
-        val result = status == Some("success")
-        if(result) inst.terminate()
-        result
-      }
-      case _ => false
-    }
-
   val dist = AmazonLinux
 
   def testBundle[B <: AnyBundle : dist.isMember : dist.isInstallable](bundle: B) = {
     test("Apply "+bundle.name+" bundle to an instance"){
       val userscript = dist.userScript(bundle, RoleCredentials)
-      // println(userscript)
+      println(userscript)
 
       val specs = InstanceSpecs(
           instanceType = InstanceType.InstanceType("c1.medium")
@@ -55,17 +31,24 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
         , instanceProfileARN = Some("arn:aws:iam::857948138625:instance-profile/statika-private-resolver")
         )
 
-      assert(applyAndWait(bundle.name, specs))
-      // println(userscript)
+      val result = ec2.applyAndWait(bundle.name, specs, 1) match {
+        case List(inst) => {
+          val ok = inst.getTagValue("statika-status") == Some("success")
+          if(ok) inst.terminate()
+          ok
+        }
+        case _ => false
+      }
+      assert(result)
     }
   }
 
   testBundle(Git)
-  testBundle(S3cmd)
-  testBundle(Velvet)
-  testBundle(Bowtie)
-  testBundle(Bowtie2)
-  testBundle(Tophat)
-  testBundle(Cufflinks)
+  // testBundle(S3cmd)
+  // testBundle(Velvet)
+  // testBundle(Bowtie)
+  // testBundle(Bowtie2)
+  // testBundle(Tophat)
+  // testBundle(Cufflinks)
 
 }
