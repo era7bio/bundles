@@ -20,7 +20,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   def testBundle[B <: AnyBundle : dist.isMember : dist.isInstallable](bundle: B) = {
     test("Apply "+bundle.name+" bundle to an instance"){
       val userscript = dist.userScript(bundle, RoleCredentials)
-      println(userscript)
+      // println(userscript)
 
       val specs = InstanceSpecs(
           instanceType = InstanceType.InstanceType("c1.medium")
@@ -44,11 +44,11 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
   testBundle(Git)
-  // testBundle(S3cmd)
-  // testBundle(Velvet)
-  // testBundle(Bowtie)
-  // testBundle(Bowtie2)
-  // testBundle(Tophat)
-  // testBundle(Cufflinks)
+  testBundle(S3cmd)
+  testBundle(Velvet)
+  testBundle(Bowtie)
+  testBundle(Bowtie2)
+  testBundle(Tophat)
+  testBundle(Cufflinks)
 
 }
