@@ -21,8 +21,8 @@ bucketSuffix := "statika.ohnosequences.com"
 
 
 libraryDependencies ++= Seq(
-  "ohnosequences" % "statika-cli_2.10.3" % "0.16.1-SNAPSHOT" % "test"
-, "ohnosequences" %% "ami-44939930" % "0.12.0-SNAPSHOT"
+  "ohnosequences" % "statika-cli_2.10.3" % "0.16.1" % "test"
+, "ohnosequences" %% "amazon-linux-ami" % "0.12.0"
 ///////////// members: ///////////////
 , "ohnosequences" %% "yum" % "0.1.0"
 , "ohnosequences" %% "s3cmd" % "0.3.0"
@@ -31,6 +31,8 @@ libraryDependencies ++= Seq(
 , "ohnosequences" %% "tophat" % "0.3.0"
 , "ohnosequences" %% "cufflinks" % "0.3.0"
 )
+
+awsStatikaVersion := "0.5.0"
 
 
 // Running test in parallel
