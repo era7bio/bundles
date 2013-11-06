@@ -2,22 +2,13 @@ name := "statika-distributions"
 
 description := "statika distributions"
 
-homepage := Some(url("https://github.com/ohnosequences/statika-distributions"))
-
 organization := "ohnosequences"
-
-organizationHomepage := Some(url("http://ohnosequences.com"))
-
-licenses := Seq("AGPLv3" -> url("http://www.gnu.org/licenses/agpl-3.0.txt"))
-
 
 distributionSettings
 
 publishMavenStyle := true
 
 publishBucketSuffix := "era7.com"
-
-bucketSuffix := "statika.ohnosequences.com"
 
 
 libraryDependencies ++= Seq(
@@ -31,8 +22,6 @@ libraryDependencies ++= Seq(
 , "ohnosequences" %% "tophat" % "0.3.0"
 , "ohnosequences" %% "cufflinks" % "0.3.0"
 )
-
-awsStatikaVersion := "0.5.0"
 
 
 // Running test in parallel
