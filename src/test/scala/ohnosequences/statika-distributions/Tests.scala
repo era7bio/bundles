@@ -15,7 +15,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // for running test you need to have this file in your project folder
   val ec2 = EC2.create(new File("AwsCredentials.properties"))
 
-  val dist = AmazonLinux
+  val dist = StatikaDistribution
 
   def testBundle[B <: AnyBundle : dist.isMember : dist.isInstallable](bundle: B) = {
     test("Apply "+bundle.name+" bundle to an instance"){
@@ -44,11 +44,11 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
   testBundle(Git)
-  testBundle(S3cmd)
-  testBundle(Velvet)
-  testBundle(Bowtie)
-  testBundle(Bowtie2)
-  testBundle(Tophat)
-  testBundle(Cufflinks)
+  // testBundle(S3cmd)
+  // testBundle(Velvet)
+  // testBundle(Bowtie)
+  // testBundle(Bowtie2)
+  // testBundle(Tophat)
+  // testBundle(Cufflinks)
 
 }
