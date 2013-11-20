@@ -2,7 +2,8 @@ package ohnosequences.statika.tests
 
 import ohnosequences.statika._
 import ohnosequences.statika.aws._
-import distributions._
+import ohnosequences.statika.bundles._
+import ohnosequences.statika.distributions._
 
 import cli.StatikaEC2._
 import ohnosequences.awstools.ec2._
@@ -15,7 +16,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // for running test you need to have this file in your project folder
   val ec2 = EC2.create(new File("AwsCredentials.properties"))
 
-  val dist = AmazonLinux
+  val dist = StatikaDistribution
 
   def testBundle[B <: AnyBundle : dist.isMember : dist.isInstallable](bundle: B) = {
     test("Apply "+bundle.name+" bundle to an instance"){
