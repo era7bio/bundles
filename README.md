@@ -16,5 +16,5 @@ Add the following dependency to your sbt project
 ```scala
 resolvers += "Era7 maven releases" at "http://releases.era7.com.s3.amazonaws.com"
 
-libraryDependencies += "ohnosequences" %% "statika-distributions" % "0.7.0"
+libraryDependencies += "ohnosequences" %% "statika-distributions" % "0.8.0"
 ```
