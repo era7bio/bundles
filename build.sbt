@@ -12,7 +12,7 @@ publishBucketSuffix := "era7.com"
 
 
 libraryDependencies ++= Seq(
-  "ohnosequences" %% "amazon-linux-ami" % "0.14.0"
+  "ohnosequences" %% "amazon-linux-ami" % "0.14.1"
 , "ohnosequences" %% "statika-cli" % "0.17.0" % "test"
 ///////////// members: ///////////////
 , "ohnosequences" %% "yum" % "0.2.0"

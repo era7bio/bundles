@@ -14,7 +14,7 @@ import org.scalatest._
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   // for running test you need to have this file in your project folder
-  val ec2 = EC2.create(new File("AwsCredentials.properties"))
+  val ec2 = EC2.create(new File("/Users/laughedelic/.ec2/Era7.credentials"))
 
   val dist = StatikaDistribution
 
