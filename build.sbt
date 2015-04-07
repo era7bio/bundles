@@ -1,25 +1,19 @@
-name := "statika-distributions"
+SbtStatikaPlugin.projectSettings
 
+name := "statika-bioinfo"
 organization := "ohnosequences"
-
 description := "statika distributions"
-
-publishMavenStyle := true
 
 publishBucketSuffix := "era7.com"
 
-
 libraryDependencies ++= Seq(
   //"ohnosequences" %% "aws-statika" % "0.14.1",*/
-  "ohnosequences" %% "statika-cli" % "0.18.0-SNAPSHOT" % Test
+  "ohnosequences" %% "statika-cli" % "0.18.0-SNAPSHOT" % Test,
+  "org.scalatest" %% "scalatest" % "2.2.4" % Test
 )
 
-dependencyOverrides += "org.scala-lang" % "scala-compiler" % scalaVersion.value
 
 // Running test in parallel
 // testOptions in Test += Tests.Argument("-PS")
-
-generateDocs := {}
-
 // Showing time spent on each test
-testOptions in Test += Tests.Argument("-oD")
+// testOptions in Test += Tests.Argument("-oD")

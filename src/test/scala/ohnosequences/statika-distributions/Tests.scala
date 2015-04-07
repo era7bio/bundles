@@ -1,42 +1,41 @@
 package ohnosequences.statika.tests
 
-import ohnosequences.statika._
-import ohnosequences.statika.aws._
-import ohnosequences.statika.bundles._
-import ohnosequences.statika.distributions._
+import ohnosequences.statika._, aws._, bundles._
+import ohnosequences.statika.bioinfo._
 
 import cli.StatikaEC2._
 import ohnosequences.awstools.ec2._
 import ohnosequences.awstools.ec2.{Tag => Ec2Tag}
 import java.io._
 import org.scalatest._
+import com.amazonaws.auth._, profile._
+import ohnosequences.awstools.regions.Region._
+
 
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   // for running test you need to have this file in your project folder
-  val ec2 = EC2.create(new File("/Users/laughedelic/.ec2/Era7.credentials"))
+  val ec2 = EC2.create(new ProfileCredentialsProvider("intercrossing"))
 
-  val dist = StatikaDistribution
+  case object ami extends amzn_ami_pv_64bit(Ireland)(1)
 
-  def testBundle[B <: AnyBundle : dist.isMember : dist.isInstallable](bundle: B) = {
+  def testBundle[E <: AnyAMI, B <: AnyBundle](env: E, bundle: B)(implicit comp: E => Compatible[E, B]) = {
     test("Apply "+bundle.name+" bundle to an instance"){
-      val userscript = dist.userScript(bundle, RoleCredentials)
-      // println(userscript)
-
       val specs = InstanceSpecs(
-          instanceType = InstanceType.InstanceType("c1.medium")
-        , amiId = dist.ami.id
-        , keyName = "statika-launcher" 
-        , deviceMapping = Map()
-        , userData = userscript
-        , instanceProfileARN = Some("arn:aws:iam::857948138625:instance-profile/statika-private-resolver")
-        )
+        instanceType = InstanceType.m1_small,
+        amiId = env.id,
+        keyName = "statika-test",
+        userData = env.userScript(bundle),
+        instanceProfile = Some("god")
+      )
+
+      println(specs.userData)
 
       val result = ec2.applyAndWait(bundle.name, specs, 1) match {
         case List(inst) => {
-          val ok = inst.getTagValue("statika-status") == Some("success")
-          if(ok) inst.terminate()
-          ok
+          inst.getTagValue("statika-status") == Some("success")
+          //if(ok) inst.terminate()
+          //ok
         }
         case _ => false
       }
@@ -44,12 +43,8 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
   }
 
-  testBundle(Git)
-  testBundle(S3cmd)
-  testBundle(Velvet)
-  testBundle(Bowtie)
-  testBundle(Bowtie2)
-  testBundle(Tophat)
-  testBundle(Cufflinks)
+  import compatibles._
+
+  testBundle(ami, git)
 
 }
