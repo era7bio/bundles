@@ -19,13 +19,17 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   case object ami extends amzn_ami_pv_64bit(Ireland)(1)
 
-  def testBundle[E <: AnyAMI, B <: AnyBundle](env: E, bundle: B)(implicit comp: E => Compatible[E, B]) = {
+  def testBundle[E <: AnyAMI, B <: AnyBundle](compat: AMICompatible[E, B]) = {
+
+    val ami = compat.environment
+    val bundle = compat.bundle
+
     test("Apply "+bundle.name+" bundle to an instance"){
       val specs = InstanceSpecs(
         instanceType = InstanceType.m1_small,
-        amiId = env.id,
+        amiId = ami.id,
         keyName = "statika-test",
-        userData = env.userScript(bundle),
+        userData = ami.userScript(bundle)(_ => new AMICompatible(ami, bundle, compat.metadata)),
         instanceProfile = Some("god")
       )
 
@@ -43,8 +47,6 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
   }
 
-  import compatibles._
-
-  testBundle(ami, git)
+  testBundle(velvetCompat)
 
 }
