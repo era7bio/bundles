@@ -1,6 +1,5 @@
 package ohnosequences.statika
 
-import ohnosequences.cosas.typeSets._
 import ohnosequences.statika._, aws._
 import ohnosequences.awstools.regions.Region._
 

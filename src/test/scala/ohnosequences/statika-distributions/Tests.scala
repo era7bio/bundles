@@ -17,14 +17,12 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // for running test you need to have this file in your project folder
   val ec2 = EC2.create(new ProfileCredentialsProvider("intercrossing"))
 
-  case object ami extends amzn_ami_pv_64bit(Ireland)(1)
-
   def testBundle[E <: AnyAMI, B <: AnyBundle](compat: AMICompatible[E, B]) = {
 
     val ami = compat.environment
     val bundle = compat.bundle
 
-    test("Apply "+bundle.name+" bundle to an instance"){
+    test(s"Apply ${bundle.name} bundle to an instance"){
       val specs = InstanceSpecs(
         instanceType = InstanceType.m1_small,
         amiId = ami.id,
@@ -36,11 +34,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
       println(specs.userData)
 
       val result = ec2.applyAndWait(bundle.name, specs, 1) match {
-        case List(inst) => {
-          inst.getTagValue("statika-status") == Some("success")
-          //if(ok) inst.terminate()
-          //ok
-        }
+        case List(inst) => inst.getTagValue("statika-status") == Some("success")
         case _ => false
       }
       assert(result)
