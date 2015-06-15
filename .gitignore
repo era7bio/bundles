@@ -19,4 +19,6 @@ project/project/
 data/in/
 data/out/
 
-.tags
+.tags*
+.atom*
+.ensime*
