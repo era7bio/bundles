@@ -86,7 +86,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   )
 
   test("trying to download bio4j-lite on an instance") {
-    // println(bio4jLiteConf.specs.userData)
+    println(bio4jLiteConf.specs.userData)
     val N = 1
     val instances = launchAndWait(ec2, bio4jLiteConf.comp.name, bio4jLiteConf.specs, N)
     // instances.foreach{ _.terminate }

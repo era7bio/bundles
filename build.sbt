@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
   "ohnosequences" %% "statika" % "2.0.0-SNAPSHOT",
   "ohnosequences" %% "aws-statika" % "2.0.0-SNAPSHOT",
   "ohnosequencesBundles" %% "velvet" % "0.5.0-SNAPSHOT",
-  "ohnosequencesBundles" %% "bio4j-dist-lite" % "0.1.0-SNAPSHOT",
+  "ohnosequencesBundles" %% "bio4j-dist" % "0.1.0-SNAPSHOT",
   "era7" %% "project-utils" % "0.1.0-SNAPSHOT",
   "org.scalatest" %% "scalatest" % "2.2.4" % Test
 )
