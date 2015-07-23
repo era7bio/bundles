@@ -8,6 +8,7 @@ import ohnosequences.awstools.ec2._
 import ohnosequences.awstools.ec2.{Tag => Ec2Tag}
 import java.io._
 import org.scalatest._
+import scala.annotation.tailrec
 import com.amazonaws.auth._, profile._
 import ohnosequences.awstools.regions.Region._
 import ohnosequences.awstools.ec2.InstanceType._
@@ -16,28 +17,81 @@ import era7.project._, era7.aws._, defs._
 
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
+  val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
+
+  // def launchInstances(ec2: EC2, specs: InstanceSpecs, number: Int): List[ec2.Instance] = {
+  //   // ec2.runInstances(number, specs)
+  //   val price = ec2.getCurrentSpotPrice(specs.instanceType)
+  //   ec2.requestSpotInstances(number, price + 0.01, specs)
+  // }
+
+  def launchAndWait(ec2: EC2, name: String, specs: InstanceSpecs, number: Int = 1): List[ec2.Instance] = {
+    // TODO: run instances in parallel
+    ec2.runInstances(number, specs) flatMap { inst =>
+      def checkStatus: String = inst.getTagValue("statika-status").getOrElse("...")
+
+      val id = inst.getInstanceId()
+      def printStatus(s: String) = println(name+" ("+id+"): "+s)
+
+      inst.createTag(Ec2Tag("Name", name))
+      printStatus("launched")
+
+      while(checkStatus != "preparing") { Thread sleep 2000 }
+      printStatus("url: "+inst.getPublicDNS().getOrElse("..."))
+
+      @tailrec def waitForSuccess(previous: String): String = {
+        val current = checkStatus
+        if(current == "failure" || current == "success") {
+          printStatus(current)
+          current
+        } else {
+          if (current != previous) printStatus(current)
+          Thread sleep 3000
+          waitForSuccess(current)
+        }
+      }
+
+      if (waitForSuccess(checkStatus) == "success") Some(inst) else None
+    }
+  }
+
 
   case object bundlesTest extends Project("BundlesTest")
   case object doTest extends Task(bundlesTest, "dotest")
 
-  object conf extends InstanceConf(
+  object velvetConf extends InstanceConf(
     task = doTest,
     keypair = keypairs.aalekhin,
     instanceType = m1_small,
     comp = velvetCompat
   )
 
-  val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
-
-  test("trying to launch an instance") {
-    println(conf.specs.userData)
-    ec2.runInstances(1, conf.specs)
+  ignore("trying to launch an instance") {
+    // println(velvetConf.specs.userData)
+    val N = 1
+    val instances = launchAndWait(ec2, velvetConf.comp.name, velvetConf.specs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
   }
 
-}
 
-// val result = ec2.applyAndWait(bundle.name, specs, 1) match {
-//   case List(inst) => inst.getTagValue("statika-status") == Some("success")
-//   case _ => false
-// }
-// assert(result)
+  case object bio4jBundleTest extends Project("Bio4jBundlesTest")
+  case object downloadBio4j extends Task(bundlesTest, "download it")
+
+  object bio4jLiteConf extends InstanceConf(
+    task = downloadBio4j,
+    keypair = keypairs.aalekhin,
+    instanceType = i2_xlarge,
+    comp = bio4jLiteCompat
+  )
+
+  test("trying to download bio4j-lite on an instance") {
+    println(bio4jLiteConf.specs.userData)
+    val N = 1
+    val instances = launchAndWait(ec2, bio4jLiteConf.comp.name, bio4jLiteConf.specs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+
+}
