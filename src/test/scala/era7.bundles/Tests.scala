@@ -1,7 +1,7 @@
-package ohnosequences.statika.tests
+package era7.bundles.tests
 
 import ohnosequences.statika._, aws._, bundles._
-import ohnosequences.statika.bioinfo._
+import era7.bundles._, std._, awsCompats._
 
 // import cli.StatikaEC2._
 import ohnosequences.awstools.ec2._
