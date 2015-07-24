@@ -13,7 +13,7 @@ import com.amazonaws.auth._, profile._
 import ohnosequences.awstools.regions.Region._
 import ohnosequences.awstools.ec2.InstanceType._
 
-import era7.project._, era7.aws._, defs._
+import era7.project._, era7.aws._, defs._, era7.aws.keypairs._
 
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
@@ -89,6 +89,24 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     println(bio4jLiteConf.specs.userData)
     val N = 1
     val instances = launchAndWait(ec2, bio4jLiteConf.comp.name, bio4jLiteConf.specs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  case object samtoolsBundleTest extends Project("SamtoolsBundlesTest")
+  case object testSamtools extends Task(bundlesTest, "download it")
+
+  object samtoolsConf extends InstanceConf(
+    task = testSamtools,
+    keypair = new Keypair("era7.mmanrique"),
+    instanceType = m3_medium,
+    comp = samtoolsCompat
+  )
+
+  test("testing samtools") {
+    println(samtoolsConf.specs.userData)
+    val N = 1
+    val instances = launchAndWait(ec2, samtoolsConf.comp.name, samtoolsConf.specs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
