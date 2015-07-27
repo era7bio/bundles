@@ -13,11 +13,13 @@ import com.amazonaws.auth._, profile._
 import ohnosequences.awstools.regions.Region._
 import ohnosequences.awstools.ec2.InstanceType._
 
-import era7.project._, era7.aws._, defs._, era7.aws.keypairs._
 
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
+  // val keyPair = "aalekhin"
+  val testKeyPair = "era7.mmanrique"
+  val testRole = Some("era7-projects")
 
   // def launchInstances(ec2: EC2, specs: InstanceSpecs, number: Int): List[ec2.Instance] = {
   //   // ec2.runInstances(number, specs)
@@ -56,57 +58,49 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  case object bundlesTest extends Project("BundlesTest")
-  case object doTest extends Task(bundlesTest, "dotest")
-
-  object velvetConf extends InstanceConf(
-    task = doTest,
-    keypair = keypairs.aalekhin,
-    instanceType = m1_small,
-    comp = velvetCompat
-  )
-
   ignore("trying to launch an instance") {
+    val velvetSpecs = velvetCompat.instanceSpecs(
+      instanceType = m1_small,
+      testKeyPair,
+      testRole
+    )
+
     // println(velvetConf.specs.userData)
+
     val N = 1
-    val instances = launchAndWait(ec2, velvetConf.comp.name, velvetConf.specs, N)
+    val instances = launchAndWait(ec2, velvetCompat.name, velvetSpecs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
 
-
-  case object bio4jBundleTest extends Project("Bio4jBundlesTest")
-  case object downloadBio4j extends Task(bundlesTest, "download it")
-
-  object bio4jLiteConf extends InstanceConf(
-    task = downloadBio4j,
-    keypair = keypairs.aalekhin,
-    instanceType = i2_xlarge,
-    comp = bio4jLiteCompat
-  )
 
   ignore("trying to download bio4j-lite on an instance") {
-    println(bio4jLiteConf.specs.userData)
+    val bio4jLiteSpecs = bio4jLiteCompat.instanceSpecs(
+      instanceType = i2_xlarge,
+      testKeyPair,
+      testRole
+    )
+
+    println(bio4jLiteSpecs.userData)
+
     val N = 1
-    val instances = launchAndWait(ec2, bio4jLiteConf.comp.name, bio4jLiteConf.specs, N)
+    val instances = launchAndWait(ec2, bio4jLiteCompat.name, bio4jLiteSpecs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
 
-  case object samtoolsBundleTest extends Project("SamtoolsBundlesTest")
-  case object testSamtools extends Task(bundlesTest, "download it")
 
-  object samtoolsConf extends InstanceConf(
-    task = testSamtools,
-    keypair = new Keypair("era7.mmanrique"),
-    instanceType = m3_medium,
-    comp = samtoolsCompat
-  )
+  ignore("testing samtools") {
+    val samtoolsSpecs = samtoolsCompat.instanceSpecs(
+      instanceType = m3_medium,
+      keyPair = "era7.mmanrique",
+      role = Some("era7-projects")
+    )
 
-  test("testing samtools") {
-    println(samtoolsConf.specs.userData)
+    // println(samtoolsSpecs.userData)
+
     val N = 1
-    val instances = launchAndWait(ec2, samtoolsConf.comp.name, samtoolsConf.specs, N)
+    val instances = launchAndWait(ec2, samtoolsCompat.name, samtoolsSpecs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
