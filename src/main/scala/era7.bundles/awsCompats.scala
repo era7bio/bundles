@@ -24,6 +24,12 @@ case object awsCompats {
     generated.metadata.Bundles
   )
 
+  case object tophatCompat extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    std.tophat,
+    generated.metadata.Bundles
+  )
+
   case object bio4jLiteCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     Bio4jDistLite,
