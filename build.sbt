@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "ohnosequencesBundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
+  "ohnosequencesBundles" %% "bowtie2" % "0.1.0-SNAPSHOT",
   "org.scalatest"         %% "scalatest"      % "2.2.4"           % Test
 )
 

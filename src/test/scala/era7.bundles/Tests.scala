@@ -58,7 +58,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  ignore("trying to launch an instance") {
+  ignore("testing Velvet") {
     val velvetSpecs = velvetCompat.instanceSpecs(
       instanceType = m1_small,
       testKeyPair,
@@ -101,6 +101,19 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
 
     val N = 1
     val instances = launchAndWait(ec2, samtoolsCompat.name, samtoolsSpecs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  ignore("testing bowtie2") {
+    val bowtie2Specs = bowtie2Compat.instanceSpecs(
+      instanceType = m3_medium,
+      keyPair = "era7.mmanrique",
+      role = Some("era7-projects")
+    )
+
+    val N = 1
+    val instances = launchAndWait(ec2, bowtie2Compat.name, bowtie2Specs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }

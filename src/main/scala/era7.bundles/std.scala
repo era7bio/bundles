@@ -14,4 +14,6 @@ case object std {
 	  openMP = false
 	)
 
+	case object bowtie2 extends Bowtie2("2.2.6")
+
 }

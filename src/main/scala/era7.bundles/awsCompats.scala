@@ -18,6 +18,12 @@ case object awsCompats {
     generated.metadata.Bundles
   )
 
+  case object bowtie2Compat extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    std.bowtie2,
+    generated.metadata.Bundles
+  )
+
   case object bio4jLiteCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     Bio4jDistLite,
