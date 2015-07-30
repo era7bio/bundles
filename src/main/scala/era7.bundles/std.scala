@@ -25,7 +25,9 @@ case object std {
 	)
 
 	case object cufflinks extends Cufflinks(
-		version = "2.2.1"		
+		version = "2.2.1"
 	)
+
+	case object prinseq extends Prinseq
 
 }

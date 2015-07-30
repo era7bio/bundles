@@ -35,6 +35,12 @@ case object awsCompats {
     std.cufflinks,
     generated.metadata.Bundles
   )
+  
+  case object prinseqCompat extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    std.prinseq,
+    generated.metadata.Bundles
+  )
 
   case object bio4jLiteCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
