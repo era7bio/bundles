@@ -30,6 +30,12 @@ case object awsCompats {
     generated.metadata.Bundles
   )
 
+  case object cufflinksCompat extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    std.cufflinks,
+    generated.metadata.Bundles
+  )
+
   case object bio4jLiteCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     Bio4jDistLite,
