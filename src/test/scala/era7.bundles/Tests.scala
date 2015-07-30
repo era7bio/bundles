@@ -58,7 +58,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  ignore("trying to launch an instance") {
+  ignore("testing Velvet") {
     val velvetSpecs = velvetCompat.instanceSpecs(
       instanceType = m1_small,
       testKeyPair,
@@ -93,14 +93,53 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   ignore("testing samtools") {
     val samtoolsSpecs = samtoolsCompat.instanceSpecs(
       instanceType = m3_medium,
-      keyPair = "era7.mmanrique",
-      role = Some("era7-projects")
+      testKeyPair,
+      testRole
     )
 
     // println(samtoolsSpecs.userData)
 
     val N = 1
     val instances = launchAndWait(ec2, samtoolsCompat.name, samtoolsSpecs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  ignore("testing bowtie2") {
+    val bowtie2Specs = bowtie2Compat.instanceSpecs(
+      instanceType = m3_medium,
+      testKeyPair,
+      testRole
+    )
+
+    val N = 1
+    val instances = launchAndWait(ec2, bowtie2Compat.name, bowtie2Specs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  ignore("testing tophat") {
+    val tophatSpecs = tophatCompat.instanceSpecs(
+      instanceType = m3_medium,
+      testKeyPair,
+      testRole
+    )
+
+    val N = 1
+    val instances = launchAndWait(ec2, tophatCompat.name, tophatSpecs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  test("testing cufflinks") {
+    val cufflinksSpecs = cufflinksCompat.instanceSpecs(
+      instanceType = m3_medium,
+      testKeyPair,
+      testRole
+    )
+
+    val N = 1
+    val instances = launchAndWait(ec2, cufflinksCompat.name, cufflinksSpecs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }

@@ -14,4 +14,18 @@ case object std {
 	  openMP = false
 	)
 
+	case object bowtie2 extends Bowtie2(
+		version = "2.2.6",
+		samtools = std.samtools
+	)
+
+	case object tophat extends Tophat(
+		version= "2.1.0",
+		bowtie2 = std.bowtie2
+	)
+
+	case object cufflinks extends Cufflinks(
+		version = "2.2.1"		
+	)
+
 }
