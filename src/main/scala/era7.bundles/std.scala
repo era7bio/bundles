@@ -30,4 +30,6 @@ case object std {
 
 	case object prinseq extends Prinseq
 
+	case object flash extends Flash("1.2.11")
+
 }
