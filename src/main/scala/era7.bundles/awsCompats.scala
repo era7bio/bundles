@@ -18,6 +18,12 @@ case object awsCompats {
     generated.metadata.Bundles
   )
 
+  case object flashCompat extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    std.flash,
+    generated.metadata.Bundles
+  )
+
   case object bowtie2Compat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     std.bowtie2,
@@ -35,7 +41,7 @@ case object awsCompats {
     std.cufflinks,
     generated.metadata.Bundles
   )
-  
+
   case object prinseqCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     std.prinseq,
