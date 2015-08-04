@@ -158,15 +158,15 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  ignore("testing FLASH") {
-    val flashSpecs = flashCompat.instanceSpecs(
+  test("std FLASH") {
+    val specs = flashCompat.instanceSpecs(
       instanceType = m3_medium,
       testKeyPair,
       testRole
     )
 
     val N = 1
-    val instances = launchAndWait(ec2, flashCompat.name, flashSpecs, N)
+    val instances = launchAndWait(ec2, flashCompat.name, specs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }

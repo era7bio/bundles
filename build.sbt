@@ -15,11 +15,12 @@ libraryDependencies ++= Seq(
   "ohnosequences"         %% "aws-statika"    % "2.0.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "bowtie2"        % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "prinseq"        % "0.1.0-SNAPSHOT",
+  
+  "ohnosequences-bundles" %% "bowtie2"        % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles" %% "samtools"       % "0.1.0-SNAPSHOT",
   "ohnosequences-bundles" %% "flash"          % "0.1.0-SNAPSHOT",
   "org.scalatest"         %% "scalatest"      % "2.2.4"           % Test
 )
