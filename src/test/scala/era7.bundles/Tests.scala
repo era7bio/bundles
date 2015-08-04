@@ -158,7 +158,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("std BLAST") {
+  ignore("std BLAST") {
     val specs = blastCompat.instanceSpecs(
       instanceType = m3_medium,
       testKeyPair,
