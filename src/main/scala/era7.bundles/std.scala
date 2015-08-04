@@ -30,5 +30,5 @@ case object std {
 
 	case object prinseq extends Prinseq
 
-	case object blast extends Blast("2.2.30+")
+	case object blast extends Blast("2.2.31")
 }
