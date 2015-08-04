@@ -145,7 +145,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  test("testing prinseq") {
+  ignore("testing prinseq") {
     val prinseqSpecs = prinseqCompat.instanceSpecs(
       instanceType = m3_medium,
       testKeyPair,
@@ -158,5 +158,17 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
+  test("std BLAST") {
+    val specs = blastCompat.instanceSpecs(
+      instanceType = m3_medium,
+      testKeyPair,
+      testRole
+    )
+
+    val N = 1
+    val instances = launchAndWait(ec2, blastCompat.name, specs, N)
+    // instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
 
 }
