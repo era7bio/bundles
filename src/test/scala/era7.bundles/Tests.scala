@@ -74,20 +74,20 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  ignore("trying to download bio4j-lite on an instance") {
-    val bio4jLiteSpecs = bio4jLiteCompat.instanceSpecs(
-      instanceType = i2_xlarge,
-      testKeyPair,
-      testRole
-    )
-
-    println(bio4jLiteSpecs.userData)
-
-    val N = 1
-    val instances = launchAndWait(ec2, bio4jLiteCompat.name, bio4jLiteSpecs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
+  // ignore("trying to download bio4j-lite on an instance") {
+  //   val bio4jLiteSpecs = bio4jLiteCompat.instanceSpecs(
+  //     instanceType = i2_xlarge,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   println(bio4jLiteSpecs.userData)
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, bio4jLiteCompat.name, bio4jLiteSpecs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
 
 
   ignore("testing samtools") {

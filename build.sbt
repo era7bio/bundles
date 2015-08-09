@@ -4,6 +4,8 @@ name          := "bundles"
 organization  := "era7"
 description   := "A standard set of bundles tested in AWS"
 
+publishBucketSuffix := "era7.com"
+
 resolvers := Seq(
   "Era7 public maven releases"  at s3("releases.era7.com").toHttps(s3region.value.toString),
   "Era7 public maven snapshots" at s3("snapshots.era7.com").toHttps(s3region.value.toString)
@@ -14,7 +16,7 @@ libraryDependencies ++= Seq(
   "ohnosequences"         %% "statika"        % "2.0.0-SNAPSHOT",
   "ohnosequences"         %% "aws-statika"    % "2.0.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
+  // "ohnosequencesBundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "bowtie2"        % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
@@ -24,10 +26,8 @@ libraryDependencies ++= Seq(
   "org.scalatest"         %% "scalatest"      % "2.2.4"           % Test
 )
 
-dependencyOverrides +=
-  "ohnosequences" %% "aws-statika" % "2.0.0-SNAPSHOT"
-
-publishBucketSuffix := "era7.com"
+// dependencyOverrides +=
+//   "ohnosequences" %% "aws-statika" % "2.0.0-SNAPSHOT"
 
 
 fatArtifactSettings
