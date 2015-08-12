@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
   // "era7"               %% "project-utils"  % "0.1.0-SNAPSHOT",
   "ohnosequences"         %% "statika"        % "2.0.0-SNAPSHOT",
   "ohnosequences"         %% "aws-statika"    % "2.0.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
   // "ohnosequencesBundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "bowtie2"        % "0.1.0-SNAPSHOT",

@@ -58,9 +58,9 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  ignore("testing Velvet") {
+  test("testing Velvet") {
     val velvetSpecs = velvetCompat.instanceSpecs(
-      instanceType = m1_small,
+      instanceType = m3_medium,
       testKeyPair,
       testRole
     )
