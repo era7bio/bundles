@@ -20,6 +20,7 @@ libraryDependencies ++= Seq(
   "ohnosequencesBundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
   "ohnosequencesBundles"  %% "prinseq"        % "0.1.0-SNAPSHOT",
+  "ohnosequencesBundles"  %% "blast"          % "0.1.0-SNAPSHOT",
   "org.scalatest"         %% "scalatest"      % "2.2.4"           % Test
 )
 
