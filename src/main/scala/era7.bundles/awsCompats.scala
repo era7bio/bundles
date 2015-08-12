@@ -48,9 +48,15 @@ case object awsCompats {
     generated.metadata.Bundles
   )
 
-  case object bio4jLiteCompat extends Compatible(
+  case object blastCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
-    Bio4jDistLite,
+    std.blast,
     generated.metadata.Bundles
   )
+
+  // case object bio4jLiteCompat extends Compatible(
+  //   amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+  //   Bio4jDistLite,
+  //   generated.metadata.Bundles
+  // )
 }

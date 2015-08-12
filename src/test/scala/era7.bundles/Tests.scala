@@ -74,20 +74,20 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  ignore("trying to download bio4j-lite on an instance") {
-    val bio4jLiteSpecs = bio4jLiteCompat.instanceSpecs(
-      instanceType = i2_xlarge,
-      testKeyPair,
-      testRole
-    )
-
-    println(bio4jLiteSpecs.userData)
-
-    val N = 1
-    val instances = launchAndWait(ec2, bio4jLiteCompat.name, bio4jLiteSpecs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
+  // ignore("trying to download bio4j-lite on an instance") {
+  //   val bio4jLiteSpecs = bio4jLiteCompat.instanceSpecs(
+  //     instanceType = i2_xlarge,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   println(bio4jLiteSpecs.userData)
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, bio4jLiteCompat.name, bio4jLiteSpecs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
 
 
   ignore("testing samtools") {
@@ -158,18 +158,17 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("testing blast") {
-    val blastSpecs = blastCompat.instanceSpecs(
+  ignore("std BLAST") {
+    val specs = blastCompat.instanceSpecs(
       instanceType = m3_medium,
       testKeyPair,
       testRole
     )
 
     val N = 1
-    val instances = launchAndWait(ec2, blastCompat.name, blastSpecs, N)
+    val instances = launchAndWait(ec2, blastCompat.name, specs, N)
     // instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
-
 
 }
