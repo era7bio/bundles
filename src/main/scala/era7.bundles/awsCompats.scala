@@ -41,6 +41,12 @@ case object awsCompats {
     std.prinseq,
     generated.metadata.Bundles
   )
+  
+  case object blastCompat extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    std.blast,
+    generated.metadata.Bundles
+  )
 
   case object blastCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),

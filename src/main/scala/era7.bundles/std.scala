@@ -29,6 +29,10 @@ case object std {
 		version = "2.2.1"
 	)
 
+	case object blast extends Blast(
+		version = "2.2.31"
+	)
+
 	case object prinseq extends Prinseq
 
 	case object blast extends Blast("2.2.31")
