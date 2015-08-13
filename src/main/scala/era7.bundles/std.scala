@@ -11,7 +11,8 @@ case object std {
 	  maxKmerLength = 99,
 	  bigAssembly = false,
 	  longSequences = false,
-	  openMP = false
+	  openMP = false,
+		version = "1.2.10"
 	)
 
 	case object bowtie2 extends Bowtie2(
