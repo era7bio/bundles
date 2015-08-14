@@ -12,6 +12,12 @@ case object awsCompats {
     generated.metadata.Bundles
   )
 
+  case object oasesCompat extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.PV)(1),
+    std.oases,
+    generated.metadata.Bundles
+  )
+
   case object samtoolsCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     std.samtools,
@@ -39,12 +45,6 @@ case object awsCompats {
   case object prinseqCompat extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     std.prinseq,
-    generated.metadata.Bundles
-  )
-  
-  case object blastCompat extends Compatible(
-    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
-    std.blast,
     generated.metadata.Bundles
   )
 

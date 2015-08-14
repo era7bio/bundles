@@ -13,17 +13,18 @@ resolvers := Seq(
 
 libraryDependencies ++= Seq(
   // "era7"               %% "project-utils"  % "0.1.0-SNAPSHOT",
-  "ohnosequences"         %% "statika"        % "2.0.0-SNAPSHOT",
-  "ohnosequences"         %% "aws-statika"    % "2.0.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
+  "ohnosequences"            %% "statika"        % "2.0.0-SNAPSHOT",
+  "ohnosequences"            %% "aws-statika"    % "2.0.0-SNAPSHOT",
+  "ohnosequences-bundles"    %% "velvet"         % "0.5.0-SNAPSHOT",
+  "ohnosequences-bundles"    %% "oases"          % "0.1.0-SNAPSHOT",
   // "ohnosequencesBundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "bowtie2"        % "0.1.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
-  "ohnosequencesBundles"  %% "prinseq"        % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles" %% "blast"          % "0.1.0",
-  "org.scalatest"         %% "scalatest"      % "2.2.4"           % Test
+  "ohnosequences-bundles"    %% "samtools"       % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"    %% "bowtie2"        % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"    %% "tophat"         % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"    %% "cufflinks"      % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"     %% "prinseq"        % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"    %% "blast"          % "0.1.0",
+  "org.scalatest"            %% "scalatest"      % "2.2.4"           % Test
 )
 
 // dependencyOverrides +=
