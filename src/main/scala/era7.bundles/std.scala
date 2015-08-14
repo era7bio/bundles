@@ -15,6 +15,10 @@ case object std {
 		version = "1.2.10"
 	)
 
+	case object oases extends Oases(
+		version = "0.2.09"
+	)
+
 	case object bowtie2 extends Bowtie2(
 		version = "2.2.6",
 		samtools = std.samtools
