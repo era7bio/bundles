@@ -73,7 +73,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("testing Oases") {
+  ignore("testing Oases") {
     val oasesSpecs = oasesCompat.instanceSpecs(
       instanceType = m3_medium,
       testKeyPair,
@@ -102,7 +102,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // }
 
 
-  ignore("testing samtools") {
+  test("testing samtools") {
     val samtoolsSpecs = samtoolsCompat.instanceSpecs(
       instanceType = m3_medium,
       testKeyPair,
