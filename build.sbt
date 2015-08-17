@@ -6,29 +6,29 @@ description   := "A standard set of bundles tested in AWS"
 
 publishBucketSuffix := "era7.com"
 
+scalaVersion := "2.11.7"
+
 resolvers := Seq(
   "Era7 public maven releases"  at s3("releases.era7.com").toHttps(s3region.value.toString),
   "Era7 public maven snapshots" at s3("snapshots.era7.com").toHttps(s3region.value.toString)
 ) ++ resolvers.value
 
 libraryDependencies ++= Seq(
-  // "era7"               %% "project-utils"  % "0.1.0-SNAPSHOT",
-  "ohnosequences"            %% "statika"        % "2.0.0-SNAPSHOT",
-  "ohnosequences"            %% "aws-statika"    % "2.0.0-SNAPSHOT",
-  "ohnosequences-bundles"    %% "velvet"         % "0.5.0-SNAPSHOT",
-  "ohnosequences-bundles"    %% "oases"          % "0.1.0-SNAPSHOT",
-  // "ohnosequencesBundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"    %% "samtools"       % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"    %% "bowtie2"        % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"    %% "tophat"         % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"    %% "cufflinks"      % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"     %% "prinseq"        % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"    %% "blast"          % "0.1.0",
-  "org.scalatest"            %% "scalatest"      % "2.2.4"           % Test
+  "ohnosequences"          %% "statika"        % "2.0.0-SNAPSHOT",
+  "ohnosequences"          %% "aws-statika"    % "2.0.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
+  // "ohnosequences-bundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "bowtie2"        % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "prinseq"        % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "blast"          % "0.1.0",
+  "org.scalatest"          %% "scalatest"      % "2.2.5"           % Test
 )
 
-// dependencyOverrides +=
-//   "ohnosequences" %% "aws-statika" % "2.0.0-SNAPSHOT"
+dependencyOverrides += "org.scala-lang.modules" %% "scala-xml" % "1.0.4"
+
 
 
 fatArtifactSettings
