@@ -14,8 +14,8 @@ resolvers := Seq(
 ) ++ resolvers.value
 
 libraryDependencies ++= Seq(
-  "ohnosequences"          %% "statika"        % "2.0.0-M3",
-  "ohnosequences"          %% "aws-statika"    % "2.0.0-M3",
+  "ohnosequences"          %% "statika"        % "2.0.0-new-instructions-SNAPSHOT",
+  "ohnosequences"          %% "aws-statika"    % "2.0.0-new-instructions-SNAPSHOT",
   "ohnosequences-bundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
   // "ohnosequences-bundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
   "ohnosequences-bundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
