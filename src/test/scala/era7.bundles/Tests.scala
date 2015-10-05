@@ -17,8 +17,8 @@ import ohnosequences.awstools.ec2.InstanceType._
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
-  // val keyPair = "aalekhin"
-  val testKeyPair = "era7.mmanrique"
+  val testKeyPair = "aalekhin"
+  // val testKeyPair = "era7.mmanrique"
   val testRole = Some("era7-projects")
 
   // def launchInstances(ec2: EC2, specs: InstanceSpecs, number: Int): List[ec2.Instance] = {
@@ -59,7 +59,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val N = 1
 
-  ignore("testing Velvet") {
+  ignore("testing velvet") {
     val velvetSpecs = awsCompats.velvet.instanceSpecs(
       instanceType = m3.medium,
       testKeyPair,
@@ -84,7 +84,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("testing bowtie2") {
+  ignore("testing bowtie2") {
     val bowtie2Specs = awsCompats.bowtie2.instanceSpecs(
       instanceType = m3.medium,
       testKeyPair,
@@ -92,6 +92,18 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     )
 
     val instances = launchAndWait(ec2, awsCompats.bowtie2.name, bowtie2Specs, N)
+    instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  test("testing tophat") {
+    val tophatSpecs = awsCompats.tophat.instanceSpecs(
+      instanceType = m3.medium,
+      testKeyPair,
+      testRole
+    )
+
+    val instances = launchAndWait(ec2, awsCompats.tophat.name, tophatSpecs, N)
     instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
@@ -125,19 +137,6 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // }
 
 
-  // ignore("testing tophat") {
-  //   val tophatSpecs = tophatCompat.instanceSpecs(
-  //     instanceType = m3.medium,
-  //     testKeyPair,
-  //     testRole
-  //   )
-  //
-  //   val N = 1
-  //   val instances = launchAndWait(ec2, tophatCompat.name, tophatSpecs, N)
-  //   // instances.foreach{ _.terminate }
-  //   assert{ instances.length == N }
-  // }
-  //
   // ignore("testing cufflinks") {
   //   val cufflinksSpecs = cufflinksCompat.instanceSpecs(
   //     instanceType = m3.medium,

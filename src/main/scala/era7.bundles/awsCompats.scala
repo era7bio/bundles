@@ -6,33 +6,20 @@ import ohnosequences.awstools.regions.Region._
 
 case object awsCompats {
 
-  case object velvet extends Compatible(
+  abstract class CompatibleFor[B <: AnyBundle](bundle: B) extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
-    std.velvet,
+    bundle,
     generated.metadata.Bundles
   )
 
-  case object samtools extends Compatible(
-    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
-    std.samtools,
-    generated.metadata.Bundles
-  )
-
-  case object bowtie2 extends Compatible(
-    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
-    std.bowtie2,
-    generated.metadata.Bundles
-  )
+  case object velvet   extends CompatibleFor(std.velvet)
+  case object samtools extends CompatibleFor(std.samtools)
+  case object bowtie2  extends CompatibleFor(std.bowtie2)
+  case object tophat   extends CompatibleFor(std.tophat)
 
   // case object oasesCompat extends Compatible(
   //   amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
   //   std.oases,
-  //   generated.metadata.Bundles
-  // )
-  //
-  // case object tophatCompat extends Compatible(
-  //   amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
-  //   std.tophat,
   //   generated.metadata.Bundles
   // )
   //
