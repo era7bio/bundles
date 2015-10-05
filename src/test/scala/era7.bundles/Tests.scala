@@ -58,32 +58,32 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
 
-  ignore("testing Velvet") {
+  test("testing Velvet") {
     val velvetSpecs = velvetCompat.instanceSpecs(
-      instanceType = m3_medium,
+      instanceType = m3.medium,
       testKeyPair,
       testRole
     )
 
-    // println(velvetConf.specs.userData)
+    // println(velvetSpecs.userData)
 
     val N = 1
     val instances = launchAndWait(ec2, velvetCompat.name, velvetSpecs, N)
-    // instances.foreach{ _.terminate }
+    instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
 
-  ignore("testing Oases") {
-    val oasesSpecs = oasesCompat.instanceSpecs(
-      instanceType = m3_medium,
-      testKeyPair,
-      testRole
-    )
-    val N = 1
-    val instances = launchAndWait(ec2, oasesCompat.name, oasesSpecs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
+  // ignore("testing Oases") {
+  //   val oasesSpecs = oasesCompat.instanceSpecs(
+  //     instanceType = m3.medium,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, oasesCompat.name, oasesSpecs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
 
 
   // ignore("trying to download bio4j-lite on an instance") {
@@ -102,85 +102,85 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // }
 
 
-  test("testing samtools") {
-    val samtoolsSpecs = samtoolsCompat.instanceSpecs(
-      instanceType = m3_medium,
-      testKeyPair,
-      testRole
-    )
-
-    // println(samtoolsSpecs.userData)
-
-    val N = 1
-    val instances = launchAndWait(ec2, samtoolsCompat.name, samtoolsSpecs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing bowtie2") {
-    val bowtie2Specs = bowtie2Compat.instanceSpecs(
-      instanceType = m3_medium,
-      testKeyPair,
-      testRole
-    )
-
-    val N = 1
-    val instances = launchAndWait(ec2, bowtie2Compat.name, bowtie2Specs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing tophat") {
-    val tophatSpecs = tophatCompat.instanceSpecs(
-      instanceType = m3_medium,
-      testKeyPair,
-      testRole
-    )
-
-    val N = 1
-    val instances = launchAndWait(ec2, tophatCompat.name, tophatSpecs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing cufflinks") {
-    val cufflinksSpecs = cufflinksCompat.instanceSpecs(
-      instanceType = m3_medium,
-      testKeyPair,
-      testRole
-    )
-
-    val N = 1
-    val instances = launchAndWait(ec2, cufflinksCompat.name, cufflinksSpecs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-
-  ignore("testing prinseq") {
-    val prinseqSpecs = prinseqCompat.instanceSpecs(
-      instanceType = m3_medium,
-      testKeyPair,
-      testRole
-    )
-
-    val N = 1
-    val instances = launchAndWait(ec2, prinseqCompat.name, prinseqSpecs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("std BLAST") {
-    val specs = blastCompat.instanceSpecs(
-      instanceType = m3_medium,
-      testKeyPair,
-      testRole
-    )
-
-    val N = 1
-    val instances = launchAndWait(ec2, blastCompat.name, specs, N)
-    // instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
+  // test("testing samtools") {
+  //   val samtoolsSpecs = samtoolsCompat.instanceSpecs(
+  //     instanceType = m3.medium,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   // println(samtoolsSpecs.userData)
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, samtoolsCompat.name, samtoolsSpecs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
+  //
+  // ignore("testing bowtie2") {
+  //   val bowtie2Specs = bowtie2Compat.instanceSpecs(
+  //     instanceType = m3.medium,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, bowtie2Compat.name, bowtie2Specs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
+  //
+  // ignore("testing tophat") {
+  //   val tophatSpecs = tophatCompat.instanceSpecs(
+  //     instanceType = m3.medium,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, tophatCompat.name, tophatSpecs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
+  //
+  // ignore("testing cufflinks") {
+  //   val cufflinksSpecs = cufflinksCompat.instanceSpecs(
+  //     instanceType = m3.medium,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, cufflinksCompat.name, cufflinksSpecs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
+  //
+  //
+  // ignore("testing prinseq") {
+  //   val prinseqSpecs = prinseqCompat.instanceSpecs(
+  //     instanceType = m3.medium,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, prinseqCompat.name, prinseqSpecs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
+  //
+  // ignore("std BLAST") {
+  //   val specs = blastCompat.instanceSpecs(
+  //     instanceType = m3.medium,
+  //     testKeyPair,
+  //     testRole
+  //   )
+  //
+  //   val N = 1
+  //   val instances = launchAndWait(ec2, blastCompat.name, specs, N)
+  //   // instances.foreach{ _.terminate }
+  //   assert{ instances.length == N }
+  // }
 
 }
