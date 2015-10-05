@@ -57,18 +57,29 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
   }
 
+  val N = 1
 
-  test("testing Velvet") {
-    val velvetSpecs = velvetCompat.instanceSpecs(
+  ignore("testing Velvet") {
+    val velvetSpecs = awsCompats.velvet.instanceSpecs(
       instanceType = m3.medium,
       testKeyPair,
       testRole
     )
 
     // println(velvetSpecs.userData)
+    val instances = launchAndWait(ec2, awsCompats.velvet.name, velvetSpecs, N)
+    instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
 
-    val N = 1
-    val instances = launchAndWait(ec2, velvetCompat.name, velvetSpecs, N)
+  test("testing samtools") {
+    val samtoolsSpecs = awsCompats.samtools.instanceSpecs(
+      instanceType = m3.medium,
+      testKeyPair,
+      testRole
+    )
+
+    val instances = launchAndWait(ec2, awsCompats.samtools.name, samtoolsSpecs, N)
     instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
@@ -102,21 +113,6 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // }
 
 
-  // test("testing samtools") {
-  //   val samtoolsSpecs = samtoolsCompat.instanceSpecs(
-  //     instanceType = m3.medium,
-  //     testKeyPair,
-  //     testRole
-  //   )
-  //
-  //   // println(samtoolsSpecs.userData)
-  //
-  //   val N = 1
-  //   val instances = launchAndWait(ec2, samtoolsCompat.name, samtoolsSpecs, N)
-  //   // instances.foreach{ _.terminate }
-  //   assert{ instances.length == N }
-  // }
-  //
   // ignore("testing bowtie2") {
   //   val bowtie2Specs = bowtie2Compat.instanceSpecs(
   //     instanceType = m3.medium,

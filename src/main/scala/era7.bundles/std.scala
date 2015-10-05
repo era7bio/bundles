@@ -13,7 +13,7 @@ case object std {
 		version = "1.2.10"
 	)
 
-	// case object samtools extends Samtools("1.2")
+	case object samtools extends Samtools("1.2")
 
 	// case object oases extends Oases(
 	// 	version = "0.2.09"

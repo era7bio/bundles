@@ -6,21 +6,21 @@ import ohnosequences.awstools.regions.Region._
 
 case object awsCompats {
 
-  case object velvetCompat extends Compatible(
+  case object velvet extends Compatible(
     amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
     std.velvet,
+    generated.metadata.Bundles
+  )
+
+  case object samtools extends Compatible(
+    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    std.samtools,
     generated.metadata.Bundles
   )
 
   // case object oasesCompat extends Compatible(
   //   amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
   //   std.oases,
-  //   generated.metadata.Bundles
-  // )
-  //
-  // case object samtoolsCompat extends Compatible(
-  //   amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
-  //   std.samtools,
   //   generated.metadata.Bundles
   // )
   //
