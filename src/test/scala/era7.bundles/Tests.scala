@@ -72,7 +72,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("testing samtools") {
+  ignore("testing samtools") {
     val samtoolsSpecs = awsCompats.samtools.instanceSpecs(
       instanceType = m3.medium,
       testKeyPair,
@@ -80,6 +80,18 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     )
 
     val instances = launchAndWait(ec2, awsCompats.samtools.name, samtoolsSpecs, N)
+    instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  test("testing bowtie2") {
+    val bowtie2Specs = awsCompats.bowtie2.instanceSpecs(
+      instanceType = m3.medium,
+      testKeyPair,
+      testRole
+    )
+
+    val instances = launchAndWait(ec2, awsCompats.bowtie2.name, bowtie2Specs, N)
     instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
@@ -113,19 +125,6 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // }
 
 
-  // ignore("testing bowtie2") {
-  //   val bowtie2Specs = bowtie2Compat.instanceSpecs(
-  //     instanceType = m3.medium,
-  //     testKeyPair,
-  //     testRole
-  //   )
-  //
-  //   val N = 1
-  //   val instances = launchAndWait(ec2, bowtie2Compat.name, bowtie2Specs, N)
-  //   // instances.foreach{ _.terminate }
-  //   assert{ instances.length == N }
-  // }
-  //
   // ignore("testing tophat") {
   //   val tophatSpecs = tophatCompat.instanceSpecs(
   //     instanceType = m3.medium,

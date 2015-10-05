@@ -1,20 +1,12 @@
-### Repository for Statika distributions
+### Era7 Statika Bundles
 
-So far it contains a simple distribution, based on Amazon Linux AMI and the following bundles:
+This repository contains tested Statika bundles to be used in Era7 projects:
 
-* [Git](https://github.com/statika/yum)
-* [S3cmd](https://github.com/statika/s3cmd)
-* [Velvet](https://github.com/statika/velvet)
-* [Cufflinks](https://github.com/statika/cufflinks)
-* [Tophat](https://github.com/statika/tophat)
-* [Bowtie & Bowtie2](https://github.com/statika/bowtie)
+* [Velvet](https://github.com/ohnosequences-bundles/velvet)
+* [Samtools](https://github.com/ohnosequences-bundles/samtools)
+* [Bowtie2](https://github.com/ohnosequences-bundles/bowtie2)
 
-#### Usage
+You can also check
 
-Add the following dependency to your sbt project
-
-```scala
-resolvers += "Era7 maven releases" at "http://releases.era7.com.s3.amazonaws.com"
-
-libraryDependencies += "ohnosequences" %% "statika-distributions" % "0.8.0"
-```
+* [versions informations](docs/src/main/scala/era7.bundles/std.scala.md)
+* [AWS-related](docs/src/main/scala/era7.bundles/awsCompats.scala.md) parameters

@@ -15,13 +15,13 @@ case object std {
 
 	case object samtools extends Samtools("1.2")
 
+	case object bowtie2 extends Bowtie2(
+		version = "2.2.6",
+		samtools = std.samtools
+	)
+
 	// case object oases extends Oases(
 	// 	version = "0.2.09"
-	// )
-	//
-	// case object bowtie2 extends Bowtie2(
-	// 	version = "2.2.6",
-	// 	samtools = std.samtools
 	// )
 	//
 	// case object tophat extends Tophat(
