@@ -2,10 +2,13 @@
 
 This repository contains tested Statika bundles to be used in Era7 projects:
 
-* [Velvet](https://github.com/ohnosequences-bundles/velvet)
-* [Samtools](https://github.com/ohnosequences-bundles/samtools)
-* [Bowtie2](https://github.com/ohnosequences-bundles/bowtie2)
-* [Tophat](https://github.com/ohnosequences-bundles/tophat)
+- [x] [Velvet](https://github.com/ohnosequences-bundles/velvet)
+- [x] [Samtools](https://github.com/ohnosequences-bundles/samtools)
+- [x] [Bowtie2](https://github.com/ohnosequences-bundles/bowtie2)
+- [x] [Tophat](https://github.com/ohnosequences-bundles/tophat)
+- [ ] [Cufflinks](https://github.com/ohnosequences-bundles/cufflinks)
+- [ ] [Printseq](https://github.com/ohnosequences-bundles/printseq)
+- [ ] [BLAST](https://github.com/ohnosequences-bundles/blast)
 
 See also documentation for
 
