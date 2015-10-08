@@ -29,12 +29,12 @@ case object std {
 		version = "2.2.1"
 	)
 
+	case object blast extends Blast(
+		version = "2.2.31"
+	)
+
 	// case object oases extends Oases(
 	// 	version = "0.2.09"
-	// )
-	//
-	// case object blast extends Blast(
-	// 	version = "2.2.31"
 	// )
 	//
 	// case object prinseq extends Prinseq
