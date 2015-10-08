@@ -25,12 +25,12 @@ case object std {
 		bowtie2 = std.bowtie2
 	)
 
+	case object cufflinks extends Cufflinks(
+		version = "2.2.1"
+	)
+
 	// case object oases extends Oases(
 	// 	version = "0.2.09"
-	// )
-	//
-	// case object cufflinks extends Cufflinks(
-	// 	version = "2.2.1"
 	// )
 	//
 	// case object blast extends Blast(

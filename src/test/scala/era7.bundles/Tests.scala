@@ -96,7 +96,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("testing tophat") {
+  ignore("testing tophat") {
     val tophatSpecs = awsCompats.tophat.instanceSpecs(
       instanceType = m3.medium,
       testKeyPair,
@@ -104,6 +104,18 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     )
 
     val instances = launchAndWait(ec2, awsCompats.tophat.name, tophatSpecs, N)
+    instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  test("testing cufflinks") {
+    val cufflinksSpecs = awsCompats.cufflinks.instanceSpecs(
+      instanceType = m3.medium,
+      testKeyPair,
+      testRole
+    )
+
+    val instances = launchAndWait(ec2, awsCompats.cufflinks.name, cufflinksSpecs, N)
     instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }
@@ -137,20 +149,6 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // }
 
 
-  // ignore("testing cufflinks") {
-  //   val cufflinksSpecs = cufflinksCompat.instanceSpecs(
-  //     instanceType = m3.medium,
-  //     testKeyPair,
-  //     testRole
-  //   )
-  //
-  //   val N = 1
-  //   val instances = launchAndWait(ec2, cufflinksCompat.name, cufflinksSpecs, N)
-  //   // instances.foreach{ _.terminate }
-  //   assert{ instances.length == N }
-  // }
-  //
-  //
   // ignore("testing prinseq") {
   //   val prinseqSpecs = prinseqCompat.instanceSpecs(
   //     instanceType = m3.medium,

@@ -20,7 +20,7 @@ libraryDependencies ++= Seq(
   "ohnosequences-bundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
   "ohnosequences-bundles"  %% "bowtie2"        % "0.1.0-SNAPSHOT",
   "ohnosequences-bundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
-  // "ohnosequences-bundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
   // "ohnosequences-bundles"  %% "prinseq"        % "0.1.0-SNAPSHOT",
   // "ohnosequences-bundles"  %% "blast"          % "0.1.0",
   // "ohnosequences-bundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
