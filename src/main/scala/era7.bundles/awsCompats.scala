@@ -18,6 +18,7 @@ case object awsCompats {
   case object tophat    extends CompatibleFor(std.tophat)
   case object cufflinks extends CompatibleFor(std.cufflinks)
   case object blast     extends CompatibleFor(std.blast)
+  case object spades    extends CompatibleFor(std.spades)
   // case object oases     extends CompatibleFor(std.oases)
   // case object prinseq   extends CompatibleFor(std.prinseq)
 

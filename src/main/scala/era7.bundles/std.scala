@@ -33,6 +33,10 @@ case object std {
 		version = "2.2.31"
 	)
 
+	case object spades extends Spades(
+		version = "3.6.1"
+	)
+
 	// case object oases extends Oases(
 	// 	version = "0.2.09"
 	// )

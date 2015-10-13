@@ -120,7 +120,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("testing blast") {
+  ignore("testing blast") {
     val blastSpecs = awsCompats.blast.instanceSpecs(
       instanceType = m3.medium,
       testKeyPair,
@@ -128,6 +128,18 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     )
 
     val instances = launchAndWait(ec2, awsCompats.blast.name, blastSpecs, N)
+    instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
+
+  test("testing spades") {
+    val spadesSpecs = awsCompats.spades.instanceSpecs(
+      instanceType = m3.medium,
+      testKeyPair,
+      testRole
+    )
+
+    val instances = launchAndWait(ec2, awsCompats.spades.name, spadesSpecs, N)
     instances.foreach{ _.terminate }
     assert{ instances.length == N }
   }

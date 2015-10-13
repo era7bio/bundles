@@ -22,12 +22,17 @@ libraryDependencies ++= Seq(
   "ohnosequences-bundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
   "ohnosequences-bundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
   "ohnosequences-bundles"  %% "blast"          % "0.2.0-SNAPSHOT",
+  "ohnosequences-bundles"  %% "spades"         % "0.1.0-SNAPSHOT",
   // "ohnosequences-bundles"  %% "prinseq"        % "0.1.0-SNAPSHOT",
   // "ohnosequences-bundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
   "org.scalatest"          %% "scalatest"      % "2.2.5"           % Test
 )
 
-dependencyOverrides += "org.scala-lang.modules" %% "scala-xml" % "1.0.4"
+dependencyOverrides ++= Set(
+  "ohnosequences"          %% "statika"        % "2.0.0-M4",
+  "ohnosequences"          %% "aws-statika"    % "2.0.0-M4",
+  "org.scala-lang.modules" %% "scala-xml" % "1.0.4"
+)
 
 
 
