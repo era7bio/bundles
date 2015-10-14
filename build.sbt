@@ -14,28 +14,26 @@ resolvers := Seq(
 ) ++ resolvers.value
 
 libraryDependencies ++= Seq(
-  "ohnosequences"          %% "statika"        % "2.0.0-M4",
-  "ohnosequences"          %% "aws-statika"    % "2.0.0-M4",
-  "ohnosequences-bundles"  %% "velvet"         % "0.5.0-SNAPSHOT",
-  "ohnosequences-bundles"  %% "samtools"       % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"  %% "bowtie2"        % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"  %% "tophat"         % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"  %% "cufflinks"      % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"  %% "spades"         % "0.1.0-SNAPSHOT",
-  "ohnosequences-bundles"  %% "blast"          % "0.2.0-SNAPSHOT",
-  "ohnosequences-bundles"  %% "flash"          % "0.1.0",
-  // "ohnosequences-bundles"  %% "prinseq"        % "0.1.0-SNAPSHOT",
-  // "ohnosequences-bundles"  %% "bio4j-dist"     % "0.1.0-SNAPSHOT",
-  "org.scalatest"          %% "scalatest"      % "2.2.5"           % Test
+  "ohnosequences" %% "statika"     % "2.0.0-M4",
+  "ohnosequences" %% "aws-statika" % "2.0.0-M4",
+  "org.scalatest" %% "scalatest"   % "2.2.5"     % Test,
+  // bundles:
+  "ohnosequences-bundles" %% "velvet"    % "0.5.0",
+  "ohnosequences-bundles" %% "samtools"  % "0.1.0",
+  "ohnosequences-bundles" %% "bowtie2"   % "0.1.0",
+  "ohnosequences-bundles" %% "tophat"    % "0.1.0",
+  "ohnosequences-bundles" %% "cufflinks" % "0.1.0",
+  "ohnosequences-bundles" %% "spades"    % "0.1.0",
+  "ohnosequences-bundles" %% "blast"     % "0.2.0",
+  "ohnosequences-bundles" %% "flash"     % "0.1.0",
+  "ohnosequences-bundles" %% "fastqc"    % "0.1.0"
 )
 
-dependencyOverrides ++= Set(
-  "ohnosequences"          %% "statika"        % "2.0.0-M4",
-  "ohnosequences"          %% "aws-statika"    % "2.0.0-M4",
-  "ohnosequences-bundles"  %% "cdevel"          % "0.3.0",
-  "ohnosequences-bundles"  %% "compressinglibs" % "0.3.0",
-  "org.scala-lang.modules" %% "scala-xml" % "1.0.4"
-)
+// dependencyOverrides ++= Set(
+  // "ohnosequences"          %% "statika"        % "2.0.0-M4",
+  // "ohnosequences"          %% "aws-statika"    % "2.0.0-M4",
+  // "org.scala-lang.modules" %% "scala-xml" % "1.0.4"
+// )
 
 
 
@@ -44,31 +42,31 @@ fatArtifactSettings
 // Running test in parallel
 // testOptions in Test += Tests.Argument("-PS")
 // Showing time spent on each test
-// testOptions in Test += Tests.Argument("-oD")
-
-val metadataObject = Def.setting { name.value.split("""\W""").map(_.capitalize).mkString }
+testOptions in Test += Tests.Argument("-oD")
 
 // mvn: "[organisation]/[module]_[scalaVersion]/[revision]/[artifact]-[revision]-[classifier].[ext]"
 // ivy: "[organisation]/[module]_[scalaVersion]/[revision]/[type]s/[artifact]-[classifier].[ext]"
-val fatUrl = Def.setting {
-  val isMvn = publishMavenStyle.value
-  val scalaV = "_"+scalaBinaryVersion.value
-  val module = moduleName.value + scalaV
-  val artifact =
-    (if (isMvn) "" else "jars/") +
-    module +
-    (if (isMvn) "-"+version.value else "") +
-    "-fat" +
-    ".jar"
+// val fatUrl = Def.setting {
+//   val isMvn = publishMavenStyle.value
+//   val scalaV = "_"+scalaBinaryVersion.value
+//   val module = moduleName.value + scalaV
+//   val artifact =
+//     (if (isMvn) "" else "jars/") +
+//     module +
+//     (if (isMvn) "-"+version.value else "") +
+//     "-fat" +
+//     ".jar"
+//
+//   Seq(
+//     publishS3Resolver.value.url,
+//     organization.value,
+//     module,
+//     version.value,
+//     artifact
+//   ).mkString("/")
+// }
 
-  Seq(
-    publishS3Resolver.value.url,
-    organization.value,
-    module,
-    version.value,
-    artifact
-  ).mkString("/")
-}
+val metadataObject = Def.setting { name.value.split("""\W""").map(_.capitalize).mkString }
 
 val generateMetadata = Def.task {
 
@@ -81,7 +79,7 @@ val generateMetadata = Def.task {
     |  val organization: String = "${organization.value}"
     |  val artifact:     String = "${name.value.toLowerCase}"
     |  val version:      String = "${version.value}"
-    |  val artifactUrl:  String = "${fatUrl.value}"
+    |  val artifactUrl:  String = "${fatArtifactUrl.value}"
     |}
     |""".stripMargin
 

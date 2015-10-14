@@ -1,6 +1,6 @@
 package era7.bundles.tests
 
-import ohnosequences.statika._, aws._, bundles._
+import ohnosequences.statika._, bundles._, aws._, amazonLinuxAMIs._
 import era7.bundles._, std._, awsCompats._
 
 // import cli.StatikaEC2._
@@ -21,15 +21,8 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // val testKeyPair = "era7.mmanrique"
   val testRole = Some("era7-projects")
 
-  // def launchInstances(ec2: EC2, specs: InstanceSpecs, number: Int): List[ec2.Instance] = {
-  //   // ec2.runInstances(number, specs)
-  //   val price = ec2.getCurrentSpotPrice(specs.instanceType)
-  //   ec2.requestSpotInstances(number, price + 0.01, specs)
-  // }
-
-  def launchAndWait(ec2: EC2, name: String, specs: InstanceSpecs, number: Int = 1): List[ec2.Instance] = {
-    // TODO: run instances in parallel
-    ec2.runInstances(number, specs) flatMap { inst =>
+  def launchAndWait(ec2: EC2, name: String, specs: InstanceSpecs): List[ec2.Instance] = {
+    ec2.runInstances(1, specs) flatMap { inst =>
       def checkStatus: String = inst.getTagValue("statika-status").getOrElse("...")
 
       val id = inst.getInstanceId()
@@ -57,103 +50,34 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
   }
 
-  val N = 1
+  def testCompat[C <: AnyAmazonLinuxAMICompatible](comp: C) = {
+    test(s"testing ${comp.name}") {
+      val specs = comp.instanceSpecs(
+        instanceType = m3.medium,
+        testKeyPair,
+        testRole
+      )
 
-  ignore("testing velvet") {
-    val velvetSpecs = awsCompats.velvet.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
-
-    // println(velvetSpecs.userData)
-    val instances = launchAndWait(ec2, awsCompats.velvet.name, velvetSpecs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
+      // println(specs.userData)
+      val instances = launchAndWait(ec2, comp.name, specs)
+      // if it was successful, we kill the instance immediately
+      instances.foreach{ _.terminate }
+      assert{ instances.length == 1 }
+    }
   }
 
-  ignore("testing samtools") {
-    val samtoolsSpecs = awsCompats.samtools.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
+  val compats = List(
+    // awsCompats.velvet,
+    // awsCompats.samtools,
+    // awsCompats.bowtie2,
+    // awsCompats.tophat,
+    // awsCompats.cufflinks,
+    // awsCompats.blast,
+    // awsCompats.flash,
+    // awsCompats.spades,
+    // awsCompats.fastqc
+  )
 
-    val instances = launchAndWait(ec2, awsCompats.samtools.name, samtoolsSpecs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing bowtie2") {
-    val bowtie2Specs = awsCompats.bowtie2.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
-
-    val instances = launchAndWait(ec2, awsCompats.bowtie2.name, bowtie2Specs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing tophat") {
-    val tophatSpecs = awsCompats.tophat.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
-
-    val instances = launchAndWait(ec2, awsCompats.tophat.name, tophatSpecs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing cufflinks") {
-    val cufflinksSpecs = awsCompats.cufflinks.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
-
-    val instances = launchAndWait(ec2, awsCompats.cufflinks.name, cufflinksSpecs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing blast") {
-    val blastSpecs = awsCompats.blast.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
-
-    val instances = launchAndWait(ec2, awsCompats.blast.name, blastSpecs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  ignore("testing spades") {
-    val spadesSpecs = awsCompats.spades.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
-
-    val instances = launchAndWait(ec2, awsCompats.spades.name, spadesSpecs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
-
-  test("testing flash") {
-    val flashSpecs = awsCompats.flash.instanceSpecs(
-      instanceType = m3.medium,
-      testKeyPair,
-      testRole
-    )
-
-    val instances = launchAndWait(ec2, awsCompats.flash.name, flashSpecs, N)
-    instances.foreach{ _.terminate }
-    assert{ instances.length == N }
-  }
+  compats.foreach(testCompat)
 
 }

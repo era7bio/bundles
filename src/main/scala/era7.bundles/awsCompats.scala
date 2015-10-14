@@ -20,7 +20,6 @@ case object awsCompats {
   case object blast     extends CompatibleFor(std.blast)
   case object flash     extends CompatibleFor(std.flash)
   case object spades    extends CompatibleFor(std.spades)
-  // case object oases     extends CompatibleFor(std.oases)
-  // case object prinseq   extends CompatibleFor(std.prinseq)
+  case object fastqc    extends CompatibleFor(std.fastqc)
 
 }
