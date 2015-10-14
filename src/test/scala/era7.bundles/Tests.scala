@@ -132,7 +132,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  test("testing spades") {
+  ignore("testing spades") {
     val spadesSpecs = awsCompats.spades.instanceSpecs(
       instanceType = m3.medium,
       testKeyPair,
@@ -144,46 +144,16 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     assert{ instances.length == N }
   }
 
-  // ignore("testing Oases") {
-  //   val oasesSpecs = oasesCompat.instanceSpecs(
-  //     instanceType = m3.medium,
-  //     testKeyPair,
-  //     testRole
-  //   )
-  //   val N = 1
-  //   val instances = launchAndWait(ec2, oasesCompat.name, oasesSpecs, N)
-  //   // instances.foreach{ _.terminate }
-  //   assert{ instances.length == N }
-  // }
+  test("testing flash") {
+    val flashSpecs = awsCompats.flash.instanceSpecs(
+      instanceType = m3.medium,
+      testKeyPair,
+      testRole
+    )
 
-
-  // ignore("trying to download bio4j-lite on an instance") {
-  //   val bio4jLiteSpecs = bio4jLiteCompat.instanceSpecs(
-  //     instanceType = i2_xlarge,
-  //     testKeyPair,
-  //     testRole
-  //   )
-  //
-  //   println(bio4jLiteSpecs.userData)
-  //
-  //   val N = 1
-  //   val instances = launchAndWait(ec2, bio4jLiteCompat.name, bio4jLiteSpecs, N)
-  //   // instances.foreach{ _.terminate }
-  //   assert{ instances.length == N }
-  // }
-
-
-  // ignore("testing prinseq") {
-  //   val prinseqSpecs = prinseqCompat.instanceSpecs(
-  //     instanceType = m3.medium,
-  //     testKeyPair,
-  //     testRole
-  //   )
-  //
-  //   val N = 1
-  //   val instances = launchAndWait(ec2, prinseqCompat.name, prinseqSpecs, N)
-  //   // instances.foreach{ _.terminate }
-  //   assert{ instances.length == N }
-  // }
+    val instances = launchAndWait(ec2, awsCompats.flash.name, flashSpecs, N)
+    instances.foreach{ _.terminate }
+    assert{ instances.length == N }
+  }
 
 }

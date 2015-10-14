@@ -37,6 +37,10 @@ case object std {
 		version = "3.6.1"
 	)
 
+	case object flash extends Flash(
+		version = "1.2.11"
+	)
+
 	// case object oases extends Oases(
 	// 	version = "0.2.09"
 	// )
