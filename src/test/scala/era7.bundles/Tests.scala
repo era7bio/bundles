@@ -76,6 +76,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     // awsCompats.flash,
     // awsCompats.spades,
     // awsCompats.fastqc
+    awsCompats.metaVelvet
   )
 
   compats.foreach(testCompat)

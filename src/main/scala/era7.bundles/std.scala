@@ -13,6 +13,12 @@ case object std {
 		version = "1.2.10"
 	)
 
+	case object metaVelvet extends MetaVelvet(
+		version = "1.2.02",
+	  categories = 2,
+	  maxKmerLength = 99
+	)(velvet = std.velvet)
+
 	case object samtools extends Samtools(
 		version = "1.2"
 	)
