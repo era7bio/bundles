@@ -18,7 +18,7 @@ libraryDependencies ++= Seq(
   "ohnosequences" %% "aws-statika" % "2.0.0-M5",
   "org.scalatest" %% "scalatest"   % "2.2.5"     % Test,
   // bundles:
-  "ohnosequences-bundles" %% "velvet"    % "0.6.0-SNAPSHOT",
+  "ohnosequences-bundles" %% "velvet"    % "0.6.0",
   "ohnosequences-bundles" %% "samtools"  % "0.1.0",
   "ohnosequences-bundles" %% "bowtie2"   % "0.1.0",
   "ohnosequences-bundles" %% "tophat"    % "0.1.0",
