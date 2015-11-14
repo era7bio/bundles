@@ -4,6 +4,9 @@ name         := "bundles"
 organization := "era7"
 description  := "A standard set of bundles tested in AWS"
 
+// the org name differs on github:
+GithubRelease.repo := s"era7bio/${name.value}"
+
 publishBucketSuffix := "era7.com"
 
 scalaVersion := "2.11.7"
