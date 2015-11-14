@@ -79,6 +79,6 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     // "metaVelvet" -> specs(awsCompats.metaVelvet)
   )
 
-  compats.foreach{ case (name, specs) => testCompat(name, specs) }
+  // compats.foreach{ case (name, specs) => testCompat(name, specs) }
 
 }
