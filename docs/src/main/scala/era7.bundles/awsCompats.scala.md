@@ -1,3 +1,5 @@
+
+```scala
 package era7.bundles
 
 import ohnosequences.statika._, bundles._, aws._
@@ -28,3 +30,12 @@ case object awsCompats {
   case object fastqc     extends CompatibleFor(std.fastqc)
 
 }
+
+```
+
+
+
+
+[main/scala/era7.bundles/awsCompats.scala]: awsCompats.scala.md
+[main/scala/era7.bundles/std.scala]: std.scala.md
+[test/scala/era7.bundles/Tests.scala]: ../../../test/scala/era7.bundles/Tests.scala.md

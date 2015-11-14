@@ -1,3 +1,5 @@
+
+```scala
 package era7.bundles
 
 import ohnosequencesBundles.statika._
@@ -54,3 +56,12 @@ case object std {
 	)
 
 }
+
+```
+
+
+
+
+[main/scala/era7.bundles/awsCompats.scala]: awsCompats.scala.md
+[main/scala/era7.bundles/std.scala]: std.scala.md
+[test/scala/era7.bundles/Tests.scala]: ../../../test/scala/era7.bundles/Tests.scala.md

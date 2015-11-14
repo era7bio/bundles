@@ -1,3 +1,5 @@
+
+```scala
 package era7.bundles.tests
 
 import ohnosequences.statika._, bundles._, aws._
@@ -82,3 +84,12 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // compats.foreach{ case (name, specs) => testCompat(name, specs) }
 
 }
+
+```
+
+
+
+
+[main/scala/era7.bundles/awsCompats.scala]: ../../../main/scala/era7.bundles/awsCompats.scala.md
+[main/scala/era7.bundles/std.scala]: ../../../main/scala/era7.bundles/std.scala.md
+[test/scala/era7.bundles/Tests.scala]: Tests.scala.md
