@@ -1,13 +1,17 @@
 package era7.bundles
 
-import ohnosequences.statika._, bundles._
-import ohnosequences.statika.aws._, api._, amazonLinuxAMIs._
-import ohnosequences.awstools.regions.Region._
+import ohnosequences.statika._, bundles._, aws._
+import ohnosequences.awstools.ec2._
+import ohnosequences.awstools.regions._
 
 case object awsCompats {
 
   abstract class CompatibleFor[B <: AnyBundle](bundle: B) extends Compatible(
-    amzn_ami_64bit(Ireland, Virtualization.HVM)(1),
+    amznAMIEnv(AmazonLinuxAMI(
+      Region.Ireland,
+      HVM,
+      InstanceStore
+    )),
     bundle,
     generated.metadata.Bundles
   )
