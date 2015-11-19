@@ -18,6 +18,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   // val testKeyPair = "era7.mmanrique"
   val testRole = Some("era7-projects")
 
+  // TODO: change for spot requests:
   def launchAndWait(ec2: EC2, name: String, specs: AnyLaunchSpecs): List[ec2.Instance] = {
     ec2.runInstances(1, specs) flatMap { inst =>
       def checkStatus: String = inst.getTagValue("statika-status").getOrElse("...")
@@ -47,11 +48,13 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
   }
 
+  val instanceType = m3.medium
+
   def specs[C <: AnyLinuxAMICompatible](comp: C)(implicit
-    checkS: m3.medium.type SupportsStorageType C#Environment#AMI#Storage,
-    checkV: m3.medium.type SupportsVirtualization C#Environment#AMI#Virt
+    checkS: instanceType.type SupportsStorageType C#Environment#AMI#Storage,
+    checkV: instanceType.type SupportsVirtualization C#Environment#AMI#Virt
   ) = comp.instanceSpecs(
-    instanceType = m3.medium,
+    instanceType = instanceType,
     testKeyPair,
     testRole
   )
@@ -67,18 +70,32 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   }
 
   val compats = Map(
-    "velvet" -> specs(awsCompats.velvet),
+    // "velvet" -> specs(awsCompats.velvet),
     // "samtools" -> specs(awsCompats.samtools),
-    "bowtie2" -> specs(awsCompats.bowtie2),
-    "tophat" -> specs(awsCompats.tophat),
-    // "cufflinks" -> specs(awsCompats.cufflinks),
-    "blast" -> specs(awsCompats.blast),
-    "flash" -> specs(awsCompats.flash)
+    // "bowtie2" -> specs(awsCompats.bowtie2),
+    // "tophat" -> specs(awsCompats.tophat),
+    // "cufflinks" -> specs(awsCompats.cufflinks)
+    // "blast" -> specs(awsCompats.blast),
+    // "flash" -> specs(awsCompats.flash)
     // "spades" -> specs(awsCompats.spades),
     // "fastqc" -> specs(awsCompats.fastqc)
     // "metaVelvet" -> specs(awsCompats.metaVelvet)
   )
-
   // compats.foreach{ case (name, specs) => testCompat(name, specs) }
+
+  // spot request for Marina:
+  ec2.ec2.requestSpotInstances(
+    new com.amazonaws.services.ec2.model.RequestSpotInstancesRequest()
+      .withInstanceCount(2)
+      .withSpotPrice("0.6")
+      .withAvailabilityZoneGroup("eu-west-1b")
+      .withLaunchSpecification(
+         awsCompats.cufflinks.instanceSpecs(
+           instanceType = c3.x8large,
+           "era7.mmanrique",
+           testRole
+         ).toAWS
+      )
+  )
 
 }
