@@ -30,7 +30,9 @@ libraryDependencies ++= Seq(
   "ohnosequences-bundles" %% "blast"     % "0.2.0",
   "ohnosequences-bundles" %% "flash"     % "0.1.0",
   "ohnosequences-bundles" %% "fastqc"    % "0.1.0",
-  "ohnosequences-bundles" %% "cutadapt"     % "0.1.0-SNAPSHOT"
+  "ohnosequences-bundles" %% "cutadapt"     % "0.1.0",
+  "ohnosequences-bundles" %% "trimgalore"     % "0.1.0-SNAPSHOT"
+
 
 )
 

@@ -27,6 +27,8 @@ case object awsCompats {
   case object spades     extends CompatibleFor(std.spades)
   case object fastqc     extends CompatibleFor(std.fastqc)
   case object cutadapt     extends CompatibleFor(std.cutadapt)
+  case object trimgalore     extends CompatibleFor(std.trimgalore)
+
 
 
 }

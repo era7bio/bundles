@@ -56,5 +56,11 @@ case object std {
 	case object cutadapt extends Cutadapt(
 	)
 
+	case object trimgalore extends Trimgalore(
+		version = "0.4.1",
+		cutadapt = std.cutadapt
+	)
+
+
 
 }
