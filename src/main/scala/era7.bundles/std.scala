@@ -53,4 +53,8 @@ case object std {
 		version = "0.11.3"
 	)
 
+	case object cutadapt extends Cutadapt(
+	)
+
+
 }
