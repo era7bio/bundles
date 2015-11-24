@@ -80,7 +80,9 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     // "spades" -> specs(awsCompats.spades),
     // "fastqc" -> specs(awsCompats.fastqc)
     // "metaVelvet" -> specs(awsCompats.metaVelvet)
-    "cutadapt" -> specs(awsCompats.cutadapt)
+    //"cutadapt" -> specs(awsCompats.cutadapt)
+    "trimgalore" -> specs(awsCompats.trimgalore)
+
 
   )
    compats.foreach{ case (name, specs) => testCompat(name, specs) }
