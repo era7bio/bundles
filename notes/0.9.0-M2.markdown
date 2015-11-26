@@ -1,0 +1,1 @@
+This release includes bundles for Trimgalore and Cutadapt

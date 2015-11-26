@@ -14,8 +14,8 @@ import ohnosequences.awstools.ec2._, InstanceType._
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
-  val testKeyPair = "aalekhin"
-  // val testKeyPair = "era7.mmanrique"
+  //val testKeyPair = "aalekhin"
+   val testKeyPair = "era7.mmanrique"
   val testRole = Some("era7-projects")
 
   // TODO: change for spot requests:
@@ -80,9 +80,13 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     // "spades" -> specs(awsCompats.spades),
     // "fastqc" -> specs(awsCompats.fastqc)
     // "metaVelvet" -> specs(awsCompats.metaVelvet)
-  )
-  // compats.foreach{ case (name, specs) => testCompat(name, specs) }
+    //"cutadapt" -> specs(awsCompats.cutadapt)
+    "trimgalore" -> specs(awsCompats.trimgalore)
 
+
+  )
+   compats.foreach{ case (name, specs) => testCompat(name, specs) }
+/*
   // spot request for Marina:
   ec2.ec2.requestSpotInstances(
     new com.amazonaws.services.ec2.model.RequestSpotInstancesRequest()
@@ -97,5 +101,6 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
          ).toAWS
       )
   )
+*/
 
 }
