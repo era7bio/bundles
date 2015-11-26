@@ -60,7 +60,8 @@ case object std {
 
 	case object trimgalore extends Trimgalore(
 		version = "0.4.1",
-		cutadapt = std.cutadapt
+		cutadapt = std.cutadapt,
+		fastqc = std.fastqc
 	)
 
 
