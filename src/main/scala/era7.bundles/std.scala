@@ -62,6 +62,10 @@ case object std {
 		fastqc = std.fastqc
 	)
 
+	case object cdevel extends Cdevel(
+	)
+
+
 
 
 }

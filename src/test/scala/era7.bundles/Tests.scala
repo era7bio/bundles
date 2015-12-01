@@ -81,7 +81,9 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     // "fastqc" -> specs(awsCompats.fastqc)
     // "metaVelvet" -> specs(awsCompats.metaVelvet)
     //"cutadapt" -> specs(awsCompats.cutadapt)
-    "trimgalore" -> specs(awsCompats.trimgalore)
+    //"trimgalore" -> specs(awsCompats.trimgalore)
+    "cdevel" -> specs(awsCompats.cdevel)
+
 
 
   )
