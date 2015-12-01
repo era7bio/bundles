@@ -10,7 +10,8 @@ case object std {
 	  bigAssembly = false,
 	  longSequences = false,
 	  openMP = false,
-		version = "1.2.10"
+		version = "1.2.10",
+		cdevel = std.cdevel
 	)
 
 	case object metaVelvet extends MetaVelvet(
