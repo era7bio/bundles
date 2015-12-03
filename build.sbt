@@ -18,7 +18,7 @@ resolvers := Seq(
 
 libraryDependencies ++= Seq(
   "ohnosequences" %% "statika"     % "2.0.0-M4",
-  "ohnosequences" %% "aws-statika" % "2.0.0-SNAPSHOT",
+  "ohnosequences" %% "aws-statika" % "2.0.0-M6",
   "org.scalatest" %% "scalatest"   % "2.2.5"     % Test,
   // bundles:
   "ohnosequences-bundles" %% "velvet"         % "0.6.0",
