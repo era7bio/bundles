@@ -21,18 +21,18 @@ libraryDependencies ++= Seq(
   "ohnosequences" %% "aws-statika" % "2.0.0-SNAPSHOT",
   "org.scalatest" %% "scalatest"   % "2.2.5"     % Test,
   // bundles:
-  "ohnosequences-bundles" %% "velvet"         % "0.7.0-SNAPSHOT",
-  "ohnosequences-bundles" %% "samtools"       % "0.2.0-SNAPSHOT",
-  "ohnosequences-bundles" %% "bowtie2"        % "0.2.0-SNAPSHOT",
-  "ohnosequences-bundles" %% "tophat"         % "0.2.0-SNAPSHOT",
+  "ohnosequences-bundles" %% "velvet"         % "0.6.0",
+  "ohnosequences-bundles" %% "samtools"       % "0.1.0",
+  "ohnosequences-bundles" %% "bowtie2"        % "0.1.0",
+  "ohnosequences-bundles" %% "tophat"         % "0.1.0",
   "ohnosequences-bundles" %% "cufflinks"      % "0.1.0",
   "ohnosequences-bundles" %% "spades"         % "0.1.0",
   "ohnosequences-bundles" %% "blast"          % "0.2.0",
-  "ohnosequences-bundles" %% "flash"          % "0.2.0-SNAPSHOT",
+  "ohnosequences-bundles" %% "flash"          % "0.1.0",
   "ohnosequences-bundles" %% "fastqc"         % "0.1.0",
   "ohnosequences-bundles" %% "cutadapt"       % "0.2.0-SNAPSHOT",
   "ohnosequences-bundles" %% "trimgalore"     % "0.3.0-SNAPSHOT",
-  "ohnosequences-bundles" %% "cdevel"         % "0.4.0-SNAPSHOT"
+  "ohnosequences-bundles" %% "cdevel"         % "0.3.0"
 
 
 )
