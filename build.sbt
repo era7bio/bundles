@@ -18,7 +18,7 @@ resolvers := Seq(
 
 libraryDependencies ++= Seq(
   "ohnosequences" %% "statika"     % "2.0.0-M4",
-  "ohnosequences" %% "aws-statika" % "2.0.0-M5",
+  "ohnosequences" %% "aws-statika" % "2.0.0-SNAPSHOT",
   "org.scalatest" %% "scalatest"   % "2.2.5"     % Test,
   // bundles:
   "ohnosequences-bundles" %% "velvet"         % "0.7.0-SNAPSHOT",
@@ -37,7 +37,9 @@ libraryDependencies ++= Seq(
 
 )
 
-// dependencyOverrides ++= Set()
+/*dependencyOverrides ++= Set(
+  "ohnosequences" %% "aws-scala-tools" % "0.15.0"
+)*/
 
 
 // Showing time spent on each test
