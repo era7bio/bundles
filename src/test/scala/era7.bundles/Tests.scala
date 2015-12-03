@@ -71,18 +71,17 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val compats = Map(
     // "velvet" -> specs(awsCompats.velvet),
-    // "samtools" -> specs(awsCompats.samtools),
+    //"samtools" -> specs(awsCompats.samtools),
     // "bowtie2" -> specs(awsCompats.bowtie2),
     // "tophat" -> specs(awsCompats.tophat),
     // "cufflinks" -> specs(awsCompats.cufflinks)
     // "blast" -> specs(awsCompats.blast),
-    // "flash" -> specs(awsCompats.flash)
+    //"flash" -> specs(awsCompats.flash),
     // "spades" -> specs(awsCompats.spades),
-    // "fastqc" -> specs(awsCompats.fastqc)
+     //"fastqc" -> specs(awsCompats.fastqc),
     // "metaVelvet" -> specs(awsCompats.metaVelvet)
-    //"cutadapt" -> specs(awsCompats.cutadapt)
+    //"cutadapt" -> specs(awsCompats.cutadapt),
     //"trimgalore" -> specs(awsCompats.trimgalore)
-    "cdevel" -> specs(awsCompats.cdevel)
 
 
 
