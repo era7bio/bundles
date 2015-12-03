@@ -64,8 +64,6 @@ case object std {
 		fastqc = std.fastqc
 	)
 
-
-
 }
 
 ```
