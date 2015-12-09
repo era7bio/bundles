@@ -22,9 +22,9 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest"   % "2.2.5"     % Test,
   // bundles:
   "ohnosequences-bundles" %% "velvet"         % "0.6.0",
-  "ohnosequences-bundles" %% "samtools"       % "0.1.0",
-  "ohnosequences-bundles" %% "bowtie2"        % "0.1.0",
-  "ohnosequences-bundles" %% "tophat"         % "0.1.0",
+  "ohnosequences-bundles" %% "samtools"       % "0.1.1",
+  "ohnosequences-bundles" %% "bowtie2"        % "0.1.1",
+  "ohnosequences-bundles" %% "tophat"         % "0.1.1",
   "ohnosequences-bundles" %% "cufflinks"      % "0.1.0",
   "ohnosequences-bundles" %% "spades"         % "0.1.0",
   "ohnosequences-bundles" %% "blast"          % "0.2.0",

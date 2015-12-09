@@ -48,7 +48,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     }
   }
 
-  val instanceType = m3.medium
+  val instanceType = m3.x2large
 
   def specs[C <: AnyLinuxAMICompatible](comp: C)(implicit
     checkS: instanceType.type SupportsStorageType C#Environment#AMI#Storage,
@@ -64,14 +64,14 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
       // println(specs.userData)
       val instances = launchAndWait(ec2, name, specs)
       // if it was successful, we kill the instance immediately
-      instances.foreach{ _.terminate }
+      //instances.foreach{ _.terminate }
       assert{ instances.length == 1 }
     }
   }
 
   val compats = Map(
     // "velvet" -> specs(awsCompats.velvet),
-    //"samtools" -> specs(awsCompats.samtools),
+    "samtools" -> specs(awsCompats.samtools)
     // "bowtie2" -> specs(awsCompats.bowtie2),
     // "tophat" -> specs(awsCompats.tophat),
     // "cufflinks" -> specs(awsCompats.cufflinks)

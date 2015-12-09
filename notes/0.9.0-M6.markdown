@@ -1,0 +1,1 @@
+Update to Samtools, Bowtie2 and Tophat 0.1.1
