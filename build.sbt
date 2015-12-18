@@ -26,7 +26,7 @@ libraryDependencies ++= Seq(
   "ohnosequences-bundles" %% "bowtie2"        % "0.1.1",
   "ohnosequences-bundles" %% "tophat"         % "0.1.1",
   "ohnosequences-bundles" %% "cufflinks"      % "0.1.0",
-  "ohnosequences-bundles" %% "spades"         % "0.1.0",
+  "ohnosequences-bundles" %% "spades"         % "0.1.1",
   "ohnosequences-bundles" %% "blast"          % "0.2.0",
   "ohnosequences-bundles" %% "flash"          % "0.1.0",
   "ohnosequences-bundles" %% "fastqc"         % "0.1.0",
