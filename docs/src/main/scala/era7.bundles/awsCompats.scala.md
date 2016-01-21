@@ -30,6 +30,7 @@ case object awsCompats {
   case object fastqc     extends CompatibleFor(std.fastqc)
   case object cutadapt   extends CompatibleFor(std.cutadapt)
   case object trimgalore extends CompatibleFor(std.trimgalore)
+  case object jellyfish  extends CompatibleFor(std.jellyfish)
 
 
 }
@@ -39,6 +40,6 @@ case object awsCompats {
 
 
 
-[main/scala/era7.bundles/awsCompats.scala]: awsCompats.scala.md
-[main/scala/era7.bundles/std.scala]: std.scala.md
 [test/scala/era7.bundles/Tests.scala]: ../../../test/scala/era7.bundles/Tests.scala.md
+[main/scala/era7.bundles/std.scala]: std.scala.md
+[main/scala/era7.bundles/awsCompats.scala]: awsCompats.scala.md

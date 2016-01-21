@@ -64,6 +64,9 @@ case object std {
 		fastqc = std.fastqc
 	)
 
+  case object jellyfish extends Jellyfish(
+    version = "2.2.4"
+  )
 }
 
 ```
@@ -71,6 +74,6 @@ case object std {
 
 
 
-[main/scala/era7.bundles/awsCompats.scala]: awsCompats.scala.md
-[main/scala/era7.bundles/std.scala]: std.scala.md
 [test/scala/era7.bundles/Tests.scala]: ../../../test/scala/era7.bundles/Tests.scala.md
+[main/scala/era7.bundles/std.scala]: std.scala.md
+[main/scala/era7.bundles/awsCompats.scala]: awsCompats.scala.md
