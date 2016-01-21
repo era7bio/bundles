@@ -16,8 +16,9 @@ import ohnosequences.awstools.ec2._, InstanceType._
 class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
-  //val testKeyPair = "aalekhin"
-   val testKeyPair = "era7.mmanrique"
+  // val testKeyPair = "aalekhin"
+  // val testKeyPair = "era7.mmanrique"
+  val testKeyPair = "era7bioinformatics.dev.eduardopt"
   val testRole = Some("era7-projects")
 
   // TODO: change for spot requests:
@@ -73,7 +74,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
 
   val compats = Map(
     // "velvet" -> specs(awsCompats.velvet),
-    "samtools" -> specs(awsCompats.samtools)
+    // "samtools" -> specs(awsCompats.samtools),
     // "bowtie2" -> specs(awsCompats.bowtie2),
     // "tophat" -> specs(awsCompats.tophat),
     // "cufflinks" -> specs(awsCompats.cufflinks)
@@ -83,11 +84,10 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
      //"fastqc" -> specs(awsCompats.fastqc),
     // "metaVelvet" -> specs(awsCompats.metaVelvet)
     //"cutadapt" -> specs(awsCompats.cutadapt),
-    //"trimgalore" -> specs(awsCompats.trimgalore)
-
-
-
+    //"trimgalore" -> specs(awsCompats.trimgalore),
+    "jellyfish" -> specs(awsCompats.jellyfish)
   )
+
    compats.foreach{ case (name, specs) => testCompat(name, specs) }
 ```
 
@@ -116,6 +116,6 @@ ec2.ec2.requestSpotInstances(
 
 
 
-[main/scala/era7.bundles/awsCompats.scala]: ../../../main/scala/era7.bundles/awsCompats.scala.md
-[main/scala/era7.bundles/std.scala]: ../../../main/scala/era7.bundles/std.scala.md
 [test/scala/era7.bundles/Tests.scala]: Tests.scala.md
+[main/scala/era7.bundles/std.scala]: ../../../main/scala/era7.bundles/std.scala.md
+[main/scala/era7.bundles/awsCompats.scala]: ../../../main/scala/era7.bundles/awsCompats.scala.md
