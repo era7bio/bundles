@@ -62,4 +62,7 @@ case object std {
 		fastqc = std.fastqc
 	)
 
+  case object jellyfish extends Jellyfish(
+    version = "2.2.4"
+  )
 }
