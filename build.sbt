@@ -33,7 +33,7 @@ libraryDependencies ++= Seq(
   "ohnosequences-bundles" %% "cutadapt"       % "0.2.0",
   "ohnosequences-bundles" %% "trimgalore"     % "0.3.0",
   "ohnosequences-bundles" %% "cdevel"         % "0.3.0",
-  "ohnosequences-bundles" %% "jellyfish"      % "0.1.0"
+  "ohnosequences-bundles" %% "jellyfish"      % "0.1.1"
 )
 
 /*dependencyOverrides ++= Set(
