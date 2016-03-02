@@ -61,7 +61,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   )
 
   def testCompat(name: String, specs: AnyLaunchSpecs) = {
-    test(s"testing ${name}") {
+    ignore(s"testing ${name}") {
       // println(specs.userData)
       val instances = launchAndWait(ec2, name, specs)
       // if it was successful, we kill the instance immediately
