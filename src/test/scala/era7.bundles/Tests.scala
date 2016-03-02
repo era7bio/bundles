@@ -86,7 +86,7 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
     "jellyfish"   -> specs(awsCompats.jellyfish)
   )
 
-   compats.foreach{ case (name, specs) => testCompat(name, specs) }
+  compats.foreach{ case (name, specs) => testCompat(name, specs) }
 /*
   // spot request for Marina:
   ec2.ec2.requestSpotInstances(
