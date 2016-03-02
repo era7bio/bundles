@@ -11,7 +11,7 @@ import ohnosequences.awstools.regions.Region._
 import ohnosequences.awstools.ec2._, InstanceType._
 
 
-class ApplicationTest extends FunSuite with ParallelTestExecution {
+class StdBundlesInstall extends FunSuite with ParallelTestExecution {
 
   val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
   // val testKeyPair = "aalekhin"

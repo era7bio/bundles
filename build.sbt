@@ -34,10 +34,6 @@ libraryDependencies ++= Seq(
   "ohnosequences-bundles" %% "jellyfish"      % "0.2.0"
 )
 
-/*dependencyOverrides ++= Set(
-  "ohnosequences" %% "aws-scala-tools" % "0.15.0"
-)*/
-
 
 // Showing time spent on each test
 testOptions in Test += Tests.Argument("-oD")

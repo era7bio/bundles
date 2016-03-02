@@ -2,7 +2,7 @@
 ```scala
 package era7.bundles.tests
 
-import ohnosequences.statika._, bundles._, aws._
+import ohnosequences.statika._, aws._
 import era7.bundles._, std._, awsCompats._
 
 import java.io._
@@ -13,7 +13,7 @@ import ohnosequences.awstools.regions.Region._
 import ohnosequences.awstools.ec2._, InstanceType._
 
 
-class ApplicationTest extends FunSuite with ParallelTestExecution {
+class StdBundlesInstall extends FunSuite with ParallelTestExecution {
 
   val ec2 = EC2.create(new ProfileCredentialsProvider("default"))
   // val testKeyPair = "aalekhin"
@@ -63,32 +63,32 @@ class ApplicationTest extends FunSuite with ParallelTestExecution {
   )
 
   def testCompat(name: String, specs: AnyLaunchSpecs) = {
-    test(s"testing ${name}") {
+    ignore(s"testing ${name}") {
       // println(specs.userData)
       val instances = launchAndWait(ec2, name, specs)
       // if it was successful, we kill the instance immediately
-      //instances.foreach{ _.terminate }
+      instances.foreach{ _.terminate }
       assert{ instances.length == 1 }
     }
   }
 
   val compats = Map(
-    // "velvet" -> specs(awsCompats.velvet),
-    // "samtools" -> specs(awsCompats.samtools),
-    // "bowtie2" -> specs(awsCompats.bowtie2),
-    // "tophat" -> specs(awsCompats.tophat),
-    // "cufflinks" -> specs(awsCompats.cufflinks)
-    // "blast" -> specs(awsCompats.blast),
-    //"flash" -> specs(awsCompats.flash),
-    // "spades" -> specs(awsCompats.spades),
-     //"fastqc" -> specs(awsCompats.fastqc),
-    // "metaVelvet" -> specs(awsCompats.metaVelvet)
-    //"cutadapt" -> specs(awsCompats.cutadapt),
-    //"trimgalore" -> specs(awsCompats.trimgalore),
-    "jellyfish" -> specs(awsCompats.jellyfish)
+    "velvet"      -> specs(awsCompats.velvet),
+    "metaVelvet"  -> specs(awsCompats.metaVelvet),
+    "samtools"    -> specs(awsCompats.samtools),
+    "bowtie2"     -> specs(awsCompats.bowtie2),
+    "tophat"      -> specs(awsCompats.tophat),
+    "cufflinks"   -> specs(awsCompats.cufflinks),
+    "blast"       -> specs(awsCompats.blast),
+    "flash"       -> specs(awsCompats.flash),
+    "spades"      -> specs(awsCompats.spades),
+    "fastqc"      -> specs(awsCompats.fastqc),
+    "cutadapt"    -> specs(awsCompats.cutadapt),
+    "trimgalore"  -> specs(awsCompats.trimgalore),
+    "jellyfish"   -> specs(awsCompats.jellyfish)
   )
 
-   compats.foreach{ case (name, specs) => testCompat(name, specs) }
+  compats.foreach{ case (name, specs) => testCompat(name, specs) }
 ```
 
 
