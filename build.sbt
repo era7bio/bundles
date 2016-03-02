@@ -17,23 +17,21 @@ resolvers := Seq(
 ) ++ resolvers.value
 
 libraryDependencies ++= Seq(
-  "ohnosequences" %% "statika"     % "2.0.0-M4",
-  "ohnosequences" %% "aws-statika" % "2.0.0-M6",
+  "ohnosequences" %% "statika"     % "2.0.0-M5",
   "org.scalatest" %% "scalatest"   % "2.2.5"     % Test,
   // bundles:
-  "ohnosequences-bundles" %% "velvet"         % "0.6.0",
-  "ohnosequences-bundles" %% "samtools"       % "0.1.1",
-  "ohnosequences-bundles" %% "bowtie2"        % "0.1.1",
-  "ohnosequences-bundles" %% "tophat"         % "0.1.1",
-  "ohnosequences-bundles" %% "cufflinks"      % "0.1.0",
-  "ohnosequences-bundles" %% "spades"         % "0.1.1",
-  "ohnosequences-bundles" %% "blast"          % "0.2.0",
-  "ohnosequences-bundles" %% "flash"          % "0.1.0",
-  "ohnosequences-bundles" %% "fastqc"         % "0.1.0",
-  "ohnosequences-bundles" %% "cutadapt"       % "0.2.0",
-  "ohnosequences-bundles" %% "trimgalore"     % "0.3.0",
-  "ohnosequences-bundles" %% "cdevel"         % "0.3.0",
-  "ohnosequences-bundles" %% "jellyfish"      % "0.1.1"
+  "ohnosequences-bundles" %% "velvet"         % "0.7.0",
+  "ohnosequences-bundles" %% "samtools"       % "0.2.0",
+  "ohnosequences-bundles" %% "bowtie2"        % "0.2.0",
+  "ohnosequences-bundles" %% "tophat"         % "0.2.0",
+  "ohnosequences-bundles" %% "cufflinks"      % "0.2.0",
+  "ohnosequences-bundles" %% "spades"         % "0.2.0",
+  "ohnosequences-bundles" %% "blast"          % "0.3.0",
+  "ohnosequences-bundles" %% "flash"          % "0.2.0",
+  "ohnosequences-bundles" %% "fastqc"         % "0.2.0",
+  "ohnosequences-bundles" %% "cutadapt"       % "0.3.0",
+  "ohnosequences-bundles" %% "trimgalore"     % "0.4.0",
+  "ohnosequences-bundles" %% "jellyfish"      % "0.2.0"
 )
 
 /*dependencyOverrides ++= Set(
