@@ -47,7 +47,7 @@ fatArtifactSettings
 enablePlugins(BuildInfoPlugin)
 buildInfoPackage := "generated.metadata"
 buildInfoObject  := name.value.split("""\W""").map(_.capitalize).mkString
-buildInfoOptions := Seq(BuildInfoOption.Traits("ohnosequences.statika.bundles.AnyArtifactMetadata"))
+buildInfoOptions := Seq(BuildInfoOption.Traits("ohnosequences.statika.AnyArtifactMetadata"))
 buildInfoKeys    := Seq[BuildInfoKey](
   organization,
   version,
