@@ -1,3 +1,4 @@
+- update build plugin
 - update all bundle version to compatibles with statika 2.0.0-M5
 - update code to statika 2.0.0-M5, enable all bundles in tests
 - test all bundles, successful
