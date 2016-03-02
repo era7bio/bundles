@@ -1,6 +1,6 @@
 package era7.bundles
 
-import ohnosequences.statika._, bundles._, aws._
+import ohnosequences.statika._, aws._
 import ohnosequences.awstools.ec2._
 import ohnosequences.awstools.regions._
 
